@@ -11,7 +11,7 @@ export async function recklessAttack({ speaker, actor, token, character, item, a
 
         let dialogId = "recklessattack";
         let dialogTitlePrimary = `${token.actor.name} | ${item.name}`;
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${item.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${item.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let initialTimeLeft = 30;
         let gmUser = game.gps.getPrimaryGM();
@@ -23,7 +23,7 @@ export async function recklessAttack({ speaker, actor, token, character, item, a
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your Reckless Attack this turn?</p>
+                                <p class="gps-dialog-paragraph">你本回合要使用鲁莽攻击吗?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

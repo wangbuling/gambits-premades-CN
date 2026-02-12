@@ -92,10 +92,10 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
     if(regionScenario === "onExit") {
         if(isTeleport) return;
         if(token.regions.has(region)) return;
-        let dragonTurtleShield = effectOriginActor.items.getName("Dragon Turtle Dueling Shield");
+        let dragonTurtleShield = effectOriginActor.items.getName("龙龟决斗盾");
         if(dragonTurtleShield) await effectOriginActor.setFlag("gambits-premades", "dragonTurtleShieldOA", true);
         
-        dialogTitle = "Opportunity Attack";
+        dialogTitle = "借机攻击";
         dialogId = "opportunityattack";
     }
     else if(regionScenario === "onEnter") {
@@ -104,18 +104,18 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
             let weaponNames = ["glaive","halberd","pike","quarterstaff","spear"];
             let hasPolearmWeapon = effectOriginActor.items.some(item => item.system?.type?.baseItem && weaponNames.includes(item.system?.type?.baseItem.toLowerCase()) && item.system.equipped === true);
             if(!hasPolearmWeapon) return;
-            dialogTitle = "Polearm Opportunity Attack";
+            dialogTitle = "长柄武器借机攻击";
             dialogId = "polearmopportunityattack";
         }
-        else if(effectOriginActor.classes?.fighter && effectOriginActor.classes?.fighter?.subclass?.name === "Battle Master") {
-            let braceItem = effectOriginActor.items.getName("Maneuvers: Brace");
+        else if(effectOriginActor.classes?.fighter && effectOriginActor.classes?.fighter?.subclass?.name === "战斗大师") {
+            let braceItem = effectOriginActor.items.getName("战技：警戒");
             if(!braceItem) return;
             braceItemUuid = braceItem.uuid;
-            dialogTitle = "Maneuvers: Brace Opportunity Attack";
+            dialogTitle = "战技：警戒借机攻击";
             dialogId = "maneuversbraceopportunityattack";
         }
         else if (hasDeadlyReachReaction) {
-            dialogTitle = "Deadly Reach Opportunity Attack";
+            dialogTitle = "死亡触及借机攻击";
             dialogId = "deadlyreachopportunityattack";
         }
         else {
@@ -216,7 +216,7 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
         <div class="gps-dialog-container">
             <div class="gps-dialog-section">
                 <div class="gps-dialog-content">
-                    <p class="gps-dialog-paragraph">Would you like to use your reaction to attack?${hasWarCaster ? " If using War Caster to cast a spell, it must effect only the creature who triggered this Opportunity Attack." : ""}${braceItemUuid ? " This will initiate a use of your Superiority Die for the Brace maneuver." : ""}</p>
+                    <p class="gps-dialog-paragraph">你想使用你的反应借机攻击吗?${hasWarCaster ? " 若使用战地施法者施展法术，必须为一个只能影响到触发借机攻击的生物的单体法术。" : ""}${braceItemUuid ? " 这会因你施展战技：警戒而消耗你一枚卓越骰。" : ""}</p>
                     <div>
                         <div class="gps-dialog-flex">
                             <label for="item-select_${dialogId}" class="gps-dialog-label">Weapon:</label>
@@ -229,7 +229,7 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
                         </div>
                         <div style="display: flex; align-items: center; margin-top: 12px;">
                             <input type="checkbox" id="gps-favorite-checkbox" style="vertical-align: middle;"/>
-                            <label for="gps-favorite-checkbox">Favorite this Option?</label>
+                            <label for="gps-favorite-checkbox">将此选项设为最爱?</label>
                         </div>
                     </div>
                 </div>
@@ -243,9 +243,9 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
     `;
 
     let dialogTitlePrimary = `${effectOriginActor.name} | ${dialogTitle}`;
-    let dialogTitleGM = `Waiting for ${effectOriginActor.name}'s selection | ${dialogTitle}`;
+    let dialogTitleGM = `等待 ${effectOriginActor.name} 选择 | ${dialogTitle}`;
 
-    let content = `<span style='text-wrap: wrap;'><img src="${effectOriginToken.actor.img}" style="width: 25px; height: auto;" /> ${effectOriginToken.actor.name} has a reaction available for an Opportunity Attack.</span>`
+    let content = `<span style='text-wrap: wrap;'><img src="${effectOriginToken.actor.img}" style="width: 25px; height: auto;" /> ${effectOriginToken.actor.name} 可以触发借机攻击。</span>`
     let chatData = { user: gmUser, content: content, roll: false };
     let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -616,7 +616,7 @@ async function processValidOptions({actor}) {
     }
     if(!warCasterMelee && !warCasterRange) hasWarCaster = false;
     
-    let overrideItems = ["Booming Blade"];
+    let overrideItems = ["轰雷剑"];
 
     let validWeapons = actor.items.filter(item => {
         const acts = item.system?.activities ?? [];
@@ -648,7 +648,7 @@ async function processValidOptions({actor}) {
     }
 
     // Find 'Unarmed Strike' from the validWeapons array and add to end of list
-    const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "unarmed strike");
+    const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "徒手攻击");
     if (unarmedIndex > -1) {
         if(validWeapons[unarmedIndex]?.uuid !== favoriteWeaponUuid) {
             let unarmedStrike = validWeapons.splice(unarmedIndex, 1)[0];
@@ -677,7 +677,7 @@ async function processValidRange({actor, token}) {
         }
     }
     if(!warCasterMelee && !warCasterRange) hasWarCaster = false;
-    let overrideItems = ["Booming Blade"];
+    let overrideItems = ["轰雷剑"];
 
     let validWeapons = actor.items.filter(item =>
         (item.type === "weapon" && item.system.equipped === true && item.system.activities?.some(a => a.actionType === "msak" || a.actionType === "mwak")) || ((item.system?.type?.value === "monster" && item.type === "feat") && item.system.activities?.some(a => a.actionType === "mwak" || a.actionType === "msak"))
@@ -691,7 +691,7 @@ async function processValidRange({actor, token}) {
 
     let oaDisabled;
     if (!validWeapons.length && !validSpells.length) {
-        ui.notifications.warn(`No Valid Melee options found, cancelling Opportunity Attack options for ${actor.name}`);
+        ui.notifications.warn(`未找到近战选项，取消 ${actor.name} 的借机攻击。`);
         oaDisabled = true;
     }
 

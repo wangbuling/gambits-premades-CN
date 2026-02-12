@@ -3,8 +3,8 @@ export async function staffOfWithering({ speaker, actor, token, character, item,
         let remainingCharges = item.system.uses.max - item.system.uses.spent;
         if(!remainingCharges) return ui.notifications.warn("You have no uses remaining for the Staff of Withering");
         let chargesText;
-        if(remainingCharges > 1) chargesText = "charges";
-        else chargesText = "charge";
+        if(remainingCharges > 1) chargesText = "点";
+        else chargesText = "点";
 
         let dialogId = "staffofwithering";
         let dialogTitlePrimary = `${token.actor.name} | ${item.name}`;
@@ -17,7 +17,7 @@ export async function staffOfWithering({ speaker, actor, token, character, item,
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use a charge to deal additional damage and possibly disadvantage the target? You have <b>${remainingCharges}</b> ${chargesText} remaining.</p>
+                                <p class="gps-dialog-paragraph">你是否要使用1点充能来造成额外伤害并给目标施加劣势？你还剩 <b>${remainingCharges}</b> ${chargesText} 充能。</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

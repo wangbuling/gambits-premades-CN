@@ -3,12 +3,12 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
     if(!workflow) return;
     const gpsUuid = "b9a797f2-3262-4a89-9b32-d8482a0c5f29";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Instinctive Charm";
+    let itemName = "直觉魅惑";
     let dialogId = gpsUuid;
     let target = workflow.token;
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Instinctive Charm Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: workflow.token, targetedToken: null, itemName: itemName, itemType: null, itemChecked: null, reactionCheck: true, sightCheck: true, rangeCheck: true, rangeTotal: 30, dispositionCheck: false, dispositionCheckType: null, workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
     
@@ -33,7 +33,7 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
         let itemProperName = chosenItem?.name;
         if(target.actor.appliedEffects.some(e => e.name === `${itemProperName} - Immunity`)) return;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let dialogContent = `
@@ -42,7 +42,7 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use ${itemProperName} to try and force the attacker to choose a different target?</p>
+                                <p class="gps-dialog-paragraph">你是否要反应使用 ${itemProperName} 试图让攻击者转向另一个目标?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                 </div>
@@ -58,7 +58,7 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
             </div>
         `;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has an option available for an attack triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以选择对此攻击触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -103,7 +103,7 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
             let saveAbility = "wis";
 
             const itemData = {
-                name: `${itemProperName} Save`,
+                name: `${itemProperName} 豁免`,
                 type: "feat",
                 img: chosenItem.img,
                 effects: [],
@@ -138,7 +138,7 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
                     <div class="gps-dialog-container">
                         <div class="gps-dialog-section">
                             <div class="gps-dialog-content">
-                                <p class="gps-dialog-paragraph">${itemProperName} has forced you to select a new target for your attack. Choose from the list below.</p>
+                                <p class="gps-dialog-paragraph">${itemProperName} 迫使你将攻击转向另一个目标，从以下列表中选择：</p>
                                 <div>
                                     <div class="gps-dialog-flex">
                                         <label for="enemy-token" class="gps-dialog-label">Target:</label>
@@ -182,13 +182,13 @@ export async function instinctiveCharm({workflowData,workflowType,workflowCombat
                 return;
             }
             else {
-                if(hasCharmImmunity) ui.notifications.warn("The creature is unaffected because they have Charm Immunity");
+                if(hasCharmImmunity) ui.notifications.warn("目标不受影响，因为其免疫魅惑。");
                 let effectData = [
                     {
                         "icon": `${chosenItem.img}`,
                         "origin": `${validTokenPrimary.actor.uuid}`,
                         "disabled": false,
-                        "name": `${chosenItem.name} - Immunity`,
+                        "name": `${chosenItem.name} - 免疫`,
                         "transfer": false,
                         "flags": {
                             "dae": {

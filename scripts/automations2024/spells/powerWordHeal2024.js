@@ -27,18 +27,18 @@ export async function powerWordHeal2024({ speaker, actor, token, character, item
             let healRoll = await new CONFIG.Dice.DamageRoll(`${remainingHP}`, {}, {type: "healing", properties: ["mgc"]}).evaluate();
 
             const itemData = {
-                name: "Power Word Healing",
+                name: "律令医疗",
                 type: "feat",
                 img: item.img
             }
 
-            await new MidiQOL.DamageOnlyWorkflow(actor, token, healRoll.total, "healing", [target], healRoll, {itemData: itemData, flavor: "Power Word Healing"});
+            await new MidiQOL.DamageOnlyWorkflow(actor, token, healRoll.total, "healing", [target], healRoll, {itemData: itemData, flavor: "律令医疗"});
 
             let isProne = target.document.hasStatusEffect("prone");
             if(!isProne) return;
 
             let dialogId = "powerwordheal";
-            let dialogTitleGM = `Waiting for ${target.actor.name}'s selection | ${item.name}`;
+            let dialogTitleGM = `等待 ${target.actor.name} 选择 | ${item.name}`;
             let dialogTitlePrimary = `${target.actor.name} | ${item.name}`;
             let browserUser = game.gps.getBrowserUser({ actorUuid: target.actor.uuid });
             let result;
@@ -50,7 +50,7 @@ export async function powerWordHeal2024({ speaker, actor, token, character, item
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Would you like to use your reaction to get up from Prone?</p>
+                                    <p class="gps-dialog-paragraph">你是否要使用反应起身?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                     </div>

@@ -3,10 +3,10 @@ export async function legendaryResistance({workflowData,workflowType,workflowCom
     if(!workflow) return;
     const gpsUuid = "d8956f7f-bc03-4ff1-8990-b48ffdef44cb";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Legendary Resistance";
+    let itemName = "传奇抗性";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Legendary Resistance Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: workflow.token, targetedToken: null, itemName: itemName, itemType: "feature", itemChecked: ["legres"], reactionCheck: false, sightCheck: false, rangeCheck: false, rangeTotal: null, dispositionCheck: false, dispositionCheckType: null, workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
 
@@ -19,7 +19,7 @@ export async function legendaryResistance({workflowData,workflowType,workflowCom
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let dialogContent = `
@@ -28,7 +28,7 @@ export async function legendaryResistance({workflowData,workflowType,workflowCom
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">${validTokenPrimary.actor.name} failed a saving throw, would you like to use a ${itemProperName} to succeed?</p>
+                                <p class="gps-dialog-paragraph">${validTokenPrimary.actor.name} 失败于一次豁免，你要使用 ${itemProperName} 来改为成功吗?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                 </div>
@@ -46,7 +46,7 @@ export async function legendaryResistance({workflowData,workflowType,workflowCom
 
         let result;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a roll triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 

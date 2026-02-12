@@ -94,7 +94,7 @@ export async function lanternHooded({ speaker, actor, token, item, args, workflo
 
   if (!activeLight && !activeLightDim) {
     if (!hasRemaining) {
-      ui.notifications.warn(`You do not have any ${animType}s remaining.`);
+      ui.notifications.warn(`你没有 ${animType} 剩下了。`);
       workflow.aborted = true;
       return;
     }

@@ -28,7 +28,7 @@ export async function entangle2024({ tokenUuid, regionUuid, regionScenario, spea
         actor = tokenDocument.actor;
         item = await fromUuid(region.flags["region-attacher"].itemUuid);
 
-        const hasEffectApplied = actor.appliedEffects.find(e => e.name === "Restrained");
+        const hasEffectApplied = actor.appliedEffects.find(e => e.name === "束缚");
         if(!hasEffectApplied) return;
 
         let dialogId = "entangle";
@@ -42,7 +42,7 @@ export async function entangle2024({ tokenUuid, regionUuid, regionScenario, spea
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your action to make a Athletics ability check to escape being Restrained?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用动作进行一次运动检定以逃脱束缚?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

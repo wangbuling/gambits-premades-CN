@@ -10,7 +10,7 @@ export async function frostsChill2024({ speaker, actor, token, character, item, 
         if(itemUsesRemaining === 0) return;
 
         let dialogId = "7e40eafe-d2d3-4211-8fc9-6eb3a8965f81";
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${macroItem.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${macroItem.name}`;
         let dialogTitlePrimary = `${token.actor.name} | ${macroItem.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let result;
@@ -23,7 +23,7 @@ export async function frostsChill2024({ speaker, actor, token, character, item, 
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to deal additional damage and reduce the creatures speed using ${itemName}?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用 ${itemName} 对目标造成额外伤害并减速?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${macroItem.img}" class="gps-dialog-image">
                                 </div>

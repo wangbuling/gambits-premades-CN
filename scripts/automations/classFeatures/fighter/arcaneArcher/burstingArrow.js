@@ -20,14 +20,14 @@ export async function burstingArrow({ speaker, actor, token, character, item, ar
         await MidiQOL.displayDSNForRoll(damageRoll, 'damageRoll');
 
         const itemData = {
-            name: "Bursting Arrow - Damage (Force)",
+            name: "爆裂矢 - 力场伤害",
             type: "feat",
             img: item.img
         }
 
         for(let target of rangeCheck) {
             if(target.actor.uuid === token.actor.uuid) continue;
-            new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "force", target ? [target] : [], damageRoll, {itemData: itemData, flavor: "Bursting Arrow - Damage (Force)"});
+            new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "force", target ? [target] : [], damageRoll, {itemData: itemData, flavor: "爆裂矢 - 力场伤害"});
         }
     }
 }

@@ -3,12 +3,12 @@ export async function poetryInMisery({workflowData,workflowType,workflowCombat})
     if(!workflow && workflowCombat === true) return;
     const gpsUuid = "f4b6923a-eda4-4c29-a6fb-a1728f6e71e3";
     if(workflow?.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Poetry in Misery";
+    let itemName = "惨中取意";
     let dialogId = gpsUuid;
     let initiatingToken;
     (workflow) ? initiatingToken = workflow.token : initiatingToken = await MidiQOL.tokenForActor(workflowData.actor.uuid);
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Poetry in Misery Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: initiatingToken, targetedToken: initiatingToken, itemName: itemName, itemType: null, itemChecked: null, reactionCheck: true, sightCheck: false, rangeCheck: true, rangeTotal: 30, dispositionCheck: true, dispositionCheckType: "ally", workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
 
@@ -24,7 +24,7 @@ export async function poetryInMisery({workflowData,workflowType,workflowCombat})
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
         let chatActor;
 
@@ -56,7 +56,7 @@ export async function poetryInMisery({workflowData,workflowType,workflowCombat})
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName} for this nat 1 ${workflowType} roll?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用反应对此自然1 ${workflowType} 掷骰施展 ${itemProperName} ?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                 </div>
@@ -99,9 +99,9 @@ export async function poetryInMisery({workflowData,workflowType,workflowCombat})
                 await itemData.update({ 'system.uses.spent' : itemData.system.uses.spent - 1 })
             }
 
-            let typeText = (workflowType === "attack") ? `${initiatingToken.actor.name}'s nat 1 attack roll` : (workflowType === "ability") ? `${initiatingToken.actor.name}'s nat 1 ability check` : (workflowType === "skill") ? `${initiatingToken.actor.name}'s nat 1 skill check` : `${chatActor.name}'s nat 1 saving throw`;
+            let typeText = (workflowType === "attack") ? `${initiatingToken.actor.name} 的自然1攻击掷骰` : (workflowType === "ability") ? `${initiatingToken.actor.name} 的自然1属性检定` : (workflowType === "skill") ? `${initiatingToken.actor.name} 的自然1技能检定` : `${chatActor.name} 的自然1豁免检定`;
 
-            let contentOutcome = `<span style='text-wrap: wrap;'>You use ${itemProperName} to soliloquize over ${typeText} and regain a use of Bardic Inspiration.<br/><img src="${initiatingToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let contentOutcome = `<span style='text-wrap: wrap;'>你在 ${typeText} 面前独自沉思，并施展 ${itemProperName} 恢复了一次诗人激励使用次数。<br/><img src="${initiatingToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
             let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
             let chatDataOutcome = {
             user: actorPlayer.id,

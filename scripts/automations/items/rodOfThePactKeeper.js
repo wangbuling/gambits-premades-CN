@@ -22,7 +22,7 @@ export async function rodOfThePactKeeper({ speaker, actor, token, character, ite
                 <div class="gps-dialog-content">
                     <div>
                         <div class="gps-dialog-flex">
-                            <p class="gps-dialog-paragraph">Would you like to use your action to recover a spell slot?</p>
+                            <p class="gps-dialog-paragraph">你是否要用一个动作恢复一个法术位？</p>
                             <div id="image-container" class="gps-dialog-image-container">
                                 <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                             </div>
@@ -47,7 +47,7 @@ export async function rodOfThePactKeeper({ speaker, actor, token, character, ite
     }
     else if (userDecision) {
         await actor.update({ "system.spells.pact.value": spellLevelNew });
-        const message = spellLevelNew === 1 ? "Spell slot recovered! You now have 1 pact spell remaining." : `Spell slot recovered! You now have ${spellLevelNew} pact spells remaining.`;
+        const message = spellLevelNew === 1 ? "法术位已恢复，你现在有1个契约法术位。" : `法术位已恢复，你现在有 ${spellLevelNew} 个契约法术位。`;
         ui.notifications.info(message);
     }
 }

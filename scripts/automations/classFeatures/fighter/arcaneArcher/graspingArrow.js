@@ -22,7 +22,7 @@ export async function graspingArrow({ speaker, actor, token, character, item, ar
         let intMod = actor.system.abilities.int.mod;
         let profMod = actor.system.attributes.prof;
         let itemData = [{
-            "name": "Grasping Arrow - Remove Vines",
+            "name": "缠绕矢 - 移除藤蔓",
             "type": "feat",
             "img": item.img,
             "system": {
@@ -77,7 +77,7 @@ export async function graspingArrow({ speaker, actor, token, character, item, ar
                         "automationOnly": false,
                         "otherActivityCompatible": true,
                     },
-                    "name": "Grasping Arrow - Remove Vines"
+                    "name": "缠绕矢 - 移除藤蔓"
                 }
             }
             },
@@ -90,11 +90,11 @@ export async function graspingArrow({ speaker, actor, token, character, item, ar
                 },
                 "dae": {
                     "macro": {
-                        "name": "Grasping Arrow - Remove Vines",
+                        "name": "缠绕矢 - 移除藤蔓",
                         "img": "icons/magic/nature/root-vine-entangled-humanoid.webp",
                         "type": "script",
                         "scope": "global",
-                        "command": `if(args[0].macroPass === \"preActiveEffects\") {\n  let target = workflow.targets.first();\n let effectNameMovement = target.actor.appliedEffects.find(effect => effect.name === 'Grasping Arrow - Movement'); let effectName = target.actor.appliedEffects.find(effect => effect.name === 'Grasping Arrow');\n    if(!effectName && !effectNameMovement) {\n        ui.notifications.warn(\"This actor is not effected by Grasping Arrow\")\n        return workflow.aborted = true;\n    } let saveRoll = await actor.rollAbilityTest('str'); if(saveRoll.total >= (8 + ${intMod} + ${profMod})) {await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: target.actor.uuid, effects: [effectNameMovement.id] }); await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: target.actor.uuid, effects: [effectName.id] }); let content = 'You successfully remove the vines from the target using your action.'; let actorPlayer = MidiQOL.playerForActor(actor); let chatData = {user: actorPlayer.id,speaker: ChatMessage.getSpeaker({ token: token }),content: content}; ChatMessage.create(chatData);} else{let content = 'You were unable to remove the vines from the target using your action.'; let actorPlayer = MidiQOL.playerForActor(actor); let chatData = {user: actorPlayer.id,speaker: ChatMessage.getSpeaker({ token: token }),content: content}; ChatMessage.create(chatData);} }`
+                        "command": `if(args[0].macroPass === \"preActiveEffects\") {\n  let target = workflow.targets.first();\n let effectNameMovement = target.actor.appliedEffects.find(effect => effect.name === 'Grasping Arrow - Movement'); let effectName = target.actor.appliedEffects.find(effect => effect.name === 'Grasping Arrow');\n    if(!effectName && !effectNameMovement) {\n        ui.notifications.warn(\"This actor is not effected by Grasping Arrow\")\n        return workflow.aborted = true;\n    } let saveRoll = await actor.rollAbilityTest('str'); if(saveRoll.total >= (8 + ${intMod} + ${profMod})) {await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: target.actor.uuid, effects: [effectNameMovement.id] }); await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: target.actor.uuid, effects: [effectName.id] }); let content = '你成功使用动作移除了藤蔓。'; let actorPlayer = MidiQOL.playerForActor(actor); let chatData = {user: actorPlayer.id,speaker: ChatMessage.getSpeaker({ token: token }),content: content}; ChatMessage.create(chatData);} else{let content = '你无法从目标身上移除藤蔓。'; let actorPlayer = MidiQOL.playerForActor(actor); let chatData = {user: actorPlayer.id,speaker: ChatMessage.getSpeaker({ token: token }),content: content}; ChatMessage.create(chatData);} }`
                     }
                 }
             }

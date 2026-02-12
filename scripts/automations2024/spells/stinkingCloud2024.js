@@ -7,7 +7,7 @@ export async function stinkingCloud2024({tokenUuid, regionUuid, regionScenario, 
     }
 
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    let itemName = "Stinking Cloud";
+    let itemName = "臭云术";
 
     if(!tokenUuid || !regionUuid || !regionScenario) {
         if(debugEnabled) game.gps.logInfo(`No Region or Token found for ${itemName}`);
@@ -46,7 +46,7 @@ export async function stinkingCloud2024({tokenUuid, regionUuid, regionScenario, 
         let chatData = {
             user: browserUser.id,
             speaker: ChatMessage.getSpeaker({ token: token }),
-            content: "You are asphyxiated by the noxious gas and lose your action and bonus action this turn retching and reeling.",
+            content: "你被有毒气体窒息，本回合无法执行动作或附赠动作，只在呕吐和蹒跚。",
         };
         ChatMessage.create(chatData);
     }

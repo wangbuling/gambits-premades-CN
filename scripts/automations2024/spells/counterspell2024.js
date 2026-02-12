@@ -4,7 +4,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
     const gpsUuid = "fb401e12-b875-47bd-9acd-8a09639c6852";
     if(workflow.item?.flags?.["gambits-premades"]?.gpsUuid === gpsUuid) return;
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    let itemName = "Counterspell";
+    let itemName = "法术反制";
     if(!workflow.activity?.consumption.spellSlot) {
         if(debugEnabled) game.gps.logInfo(`${itemName} failed no activity spell slot consumption (assumed activity is not an initial spell cast)`);
         return;
@@ -19,7 +19,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
     let hasDeafenedStatus;
     if (!hasVSMProperty) return;
 
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Counterspell Timeout`));
     let selectedToken = workflow.token;
     let notInitialCast = false;
     let itemRoll = false;
@@ -49,7 +49,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
             let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
             let itemProperName = chosenItem?.name;
             const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-            const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+            const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
             
             browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
@@ -95,7 +95,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Would you like to use your reaction to ${itemProperName}?</p>
+                                    <p class="gps-dialog-paragraph">你要使用你的 ${itemProperName} 反应吗?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                     </div>
@@ -112,7 +112,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
                 </div>
             `;
     
-            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a spell triggering ${itemProperName}.</span>`;
+            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以用反应触发 ${itemProperName}.</span>`;
             let chatData = { user: gmUser, content: content, roll: false };
             let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
     
@@ -163,10 +163,10 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
                 if(!saveCheck) continue;
                 
                 if (saveCheck.failedSaves.size !== 0) {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature failed its saving throw and was counterspelled.<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标未能通过豁免检定，法术被反制了。<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature succeeded its saving throw and was not counterspelled.<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标通过了豁免检定，法术未能被反制。<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     csFailure = true;
                 }
 
@@ -260,7 +260,7 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
                             <div class="gps-dialog-content">
                                 <div>
                                     <div class="gps-dialog-flex">
-                                        <p class="gps-dialog-paragraph">Would you like to use your reaction to ${itemProperName}?</p>
+                                        <p class="gps-dialog-paragraph">你要使用你的 ${itemProperName} 反应吗?</p>
                                         <div id="image-container" class="gps-dialog-image-container">
                                             <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                         </div>
@@ -329,10 +329,10 @@ export async function counterspell2024({ workflowData,workflowType,workflowComba
                 if(!saveCheck) continue;
                 
                 if (saveCheck.failedSaves.size !== 0) {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature failed its saving throw and was counterspelled.<br><img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标未能通过豁免检定，法术被反制了。<br><img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature succeeded its saving throw and was not counterspelled.<br><img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标通过了豁免检定，法术未能被反制。<br><img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     csFailure = true;
                 }
 
@@ -378,7 +378,7 @@ function getSubtleSpell({validToken}) {
             <div style="display: flex; align-items: center;">
                 <input type="checkbox" id="gps-checkbox" style="vertical-align: middle;"/>
                 <label for="gps-checkbox">
-                    Use Subtle Spell? | ${ itemSorcery.system.uses.max - itemSorcery.system.uses.spent } ${ itemSorcery.system.uses.max - itemSorcery.system.uses.spent > 1 ? "Points" : "Point" } Remaining
+                    使用精妙法术吗？还有 | ${ itemSorcery.system.uses.max - itemSorcery.system.uses.spent } ${ itemSorcery.system.uses.max - itemSorcery.system.uses.spent > 1 ? "点" : "点" } 剩余。
                 </label>
             </div>
         `;

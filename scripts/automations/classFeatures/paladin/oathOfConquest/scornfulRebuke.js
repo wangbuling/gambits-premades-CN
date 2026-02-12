@@ -10,11 +10,11 @@ export async function scornfulRebuke({ speaker, actor, token, character, item, a
         await MidiQOL.displayDSNForRoll(damageRoll, 'damageRoll');
 
         const itemData = {
-            name: "Scornful Rebuke - Damage (Psychic)",
+            name: "轻蔑呵斥 - 心灵伤害",
             type: "feat",
             img: item.img
         }
 
-        new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "psychic", [target], damageRoll, {itemData: itemData, flavor: "Scornful Rebuke - Damage (Psychic)"});
+        new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "psychic", [target], damageRoll, {itemData: itemData, flavor: "轻蔑呵斥 - 心灵伤害"});
     }
 }

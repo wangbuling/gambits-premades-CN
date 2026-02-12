@@ -3,14 +3,14 @@ export async function flashOfGenius({workflowData,workflowType,workflowCombat}) 
     if(!workflow && workflowCombat === true) return;
     const gpsUuid = "a0e20506-9e70-4bca-bfa6-7e5d16ba42fa";
     if(workflow?.item?.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Flash of Genius";
+    let itemName = "灵光一闪";
     let dialogId = gpsUuid;
     let initiatingToken;
     (workflow) ? initiatingToken = workflow.token : initiatingToken = await MidiQOL.tokenForActor(workflowData.actor.uuid);
     let targetedToken;
     (workflow) ? targetedToken = "" : targetedToken = await MidiQOL.tokenForActor(workflowData.actor.uuid);
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Flash of Genius Timeout`));
     let dispositionCheckType;
     (workflow) ? dispositionCheckType = "enemy" : dispositionCheckType = "ally";
 
@@ -27,14 +27,14 @@ export async function flashOfGenius({workflowData,workflowType,workflowCombat}) 
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let dialogContent = `
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName}${targets.length > 1 && casterInTargets ? "? Choose yourself or an ally below" : targets.length > 1 ? "? Choose an ally below" : casterInTargets ? ` for yourself?` : ` for ${targetNames[0]}?`}</p>
+                        <p class="gps-dialog-paragraph">你是否要使用反应施展 ${itemProperName}${targets.length > 1 && casterInTargets ? "? 从以下列表中选择" : targets.length > 1 ? "? 从以下列表中选择" : casterInTargets ? ` 对你自身?` : ` 对 ${targetNames[0]}?`}</p>
                             <div>
                                 <div class="gps-dialog-flex">
                                     <label for="ally-token" class="gps-dialog-label">Target:</label>
@@ -99,7 +99,7 @@ export async function flashOfGenius({workflowData,workflowType,workflowCombat}) 
             let saveBonus = await new CONFIG.Dice.DamageRoll(`${intMod}`).evaluate();
             let newRoll = await MidiQOL.addRollTo(rollFound, saveBonus);
 
-            let chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used ${chosenItem.name} and added ${intMod} to ${target.actor.name}'s roll.<img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了 ${chosenItem.name} ，增加了 ${intMod} 到 ${target.actor.name}的检定结果上。<img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
             await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: newRoll});
             return;

@@ -3,7 +3,7 @@ export async function interception({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "411b0d88-a483-4d85-97d9-2bd8dbd4ef70";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Fighting Style: Interception";
+    let itemName = "战斗风格：拦截";
     let dialogId = gpsUuid;
     let target = workflow.hitTargets.first();
     const actionTypes = ["mwak", "rwak", "msak", "rsak"];
@@ -21,7 +21,7 @@ export async function interception({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let damageTypes = workflow.damageRolls.map(roll => roll.options.type);
@@ -29,7 +29,7 @@ export async function interception({workflowData,workflowType,workflowCombat}) {
         if (hasHealing) return;
         let damageTotals = workflow.damageRolls.map(roll => roll.total);
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a roll triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -39,7 +39,7 @@ export async function interception({workflowData,workflowType,workflowCombat}) {
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName} for this ${workflowType} roll?</p>
+                        <p class="gps-dialog-paragraph">你是否要对此 ${workflowType} 掷骰使用反应施展 ${itemProperName} ？ </p>
                         <div>
                             <div class="gps-dialog-flex">
                                 <label for="damage-list" class="gps-dialog-label">Damage:</label>
@@ -151,7 +151,7 @@ export async function interception({workflowData,workflowType,workflowCombat}) {
     
             workflow.workflowOptions.noOnUseMacro = saveSetting;
 
-            let content = `<span style='text-wrap: wrap;'>You use ${itemProperName} and reduce damage taken for ${target.actor.name} by ${reroll.total}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let content = `<span style='text-wrap: wrap;'>你使用了 ${itemProperName} 减少了 ${target.actor.name} 受到的伤害 ${reroll.total} 点。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
             let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
             let chatData = {
                 user: actorPlayer.id,

@@ -3,8 +3,8 @@ const Base = foundry.applications.api.HandlebarsApplicationMixin(foundry.applica
 
 export function registerSettings() {
     game.settings.register('gambits-premades', 'Mirror 3rd Party Dialog for GMs', {
-        name: "Mirror 3rd Party Dialog for GMs",
-        hint: "If enabled, 3rd party dialog's will be sent to the GM as well as the player. Either party can interact with the dialog to use/dismiss/pause it.",
+        name: "GM第三方对话框镜像",
+        hint: "启用后，第三方对话框将同时发送给GM与玩家，任意一方均可操作对话框以使用/关闭/暂停功能。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -12,8 +12,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Opportunity Attack', {
-        name: "Enable Opportunity Attack",
-        hint: "If enabled, automatically adds 'Opportunity Attack' item to appropriate combatants on combat start and removes 'Opportunity Attack' item on combat end.",
+        name: "启用借机攻击",
+        hint: "启用后，在战斗开始时自动为相关参战者添加“借机攻击”物品，并在战斗结束时移除该物品。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -21,8 +21,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Opportunity Attack Timeout', {
-        name: "Opportunity Attack Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "借机攻击超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒",
         scope: 'world',
         config: false,
         type: String,
@@ -30,8 +30,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Counterspell', {
-        name: "Enable Counterspell",
-        hint: "If enabled, this will present an appropriate dialog to users with counterspell, and automate counterspell application when used.",
+        name: "启用法术反制",
+        hint: "若启用此功能，当角色身上存在法术反制时，系统将向用户弹出相应对话框，并在使用法术反制时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -39,8 +39,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Counterspell Timeout', {
-        name: "Counterspell Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "法术反制超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -55,8 +55,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Silvery Barbs', {
-        name: "Enable Silvery Barbs",
-        hint: "If enabled, this will present an appropriate dialog to users with silvery barbs, and automate silvery barbs application when used.",
+        name: "启用银光锐语",
+        hint: "若启用此功能，当角色身上存在银光锐语时，系统将向用户弹出相应对话框，并在使用银光锐语时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -64,8 +64,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Silvery Barbs Timeout', {
-        name: "Silvery Barbs Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 30 seconds.",
+        name: "银光锐语超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为30秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -80,8 +80,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Cutting Words', {
-        name: "Enable Cutting Words",
-        hint: "If enabled, this will present an appropriate dialog to users with cutting words, and automate cutting words application when used.",
+        name: "启用语出惊人",
+        hint: "若启用此功能，当角色身上存在语出惊人时，系统将向用户弹出相应对话框，并在使用语出惊人时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -89,8 +89,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Cutting Words Timeout', {
-        name: "Cutting Words Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 30 seconds.",
+        name: "语出惊人超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为30秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -105,8 +105,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Interception', {
-        name: "Enable Interception",
-        hint: "If enabled, this will present an appropriate dialog to users with fighting style: interception, and automate interception application when used.",
+        name: "启用拦截",
+        hint: "若启用此功能，当角色身上存在战斗风格：拦截时，系统将向用户弹出相应对话框，并在使用拦截时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -114,8 +114,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Interception Timeout', {
-        name: "Interception Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 30 seconds.",
+        name: "拦截超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为30秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -130,7 +130,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Indomitable', {
-        name: "Enable Indomitable",
+        name: "启用不屈",
         hint: "",
         scope: 'world',
         config: false,
@@ -139,7 +139,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Indomitable Timeout', {
-        name: "Indomitable Timeout",
+        name: "不屈超时时间",
         hint: "",
         scope: 'world',
         config: false,
@@ -155,7 +155,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Protection', {
-        name: "Enable Protection",
+        name: "启用守护（战斗风格）",
         hint: "",
         scope: 'world',
         config: false,
@@ -164,7 +164,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Protection Timeout', {
-        name: "Protection Timeout",
+        name: "守护超时时间",
         hint: "",
         scope: 'world',
         config: false,
@@ -180,7 +180,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Sentinel', {
-        name: "Enable Sentinel",
+        name: "启用哨兵",
         hint: "",
         scope: 'world',
         config: false,
@@ -189,7 +189,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Sentinel Timeout', {
-        name: "Sentinel Timeout",
+        name: "哨兵超时时间",
         hint: "",
         scope: 'world',
         config: false,
@@ -205,7 +205,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Riposte', {
-        name: "Enable Riposte",
+        name: "启用反击（战技）",
         hint: "",
         scope: 'world',
         config: false,
@@ -214,7 +214,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Riposte Timeout', {
-        name: "Riposte Timeout",
+        name: "反击超时时间",
         hint: "",
         scope: 'world',
         config: false,
@@ -230,8 +230,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Poetry in Misery', {
-        name: "Enable Poetry in Misery",
-        hint: "If enabled, this will present an appropriate dialog to users with bards Poetry in Misery feature, and automate application when used.",
+        name: "启用惨中取意",
+        hint: "若启用此功能，当角色身上存在吟游诗人特性惨中取意时，系统将向用户弹出相应对话框，并在使用时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -239,8 +239,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Poetry in Misery Timeout', {
-        name: "Poetry in Misery Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "惨中取意超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -255,8 +255,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Witches Hex', {
-        name: "Enable Witches Hex",
-        hint: "If enabled, this will present an appropriate dialog to users with the witches Hex feature, and automate application when used.",
+        name: "启用女巫诅咒",
+        hint: "若启用此功能，当角色身上存在女巫特性女巫诅咒时，系统将向用户弹出相应对话框，并在使用时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -264,8 +264,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Witches Hex Timeout', {
-        name: "Witches Hex Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 30 seconds.",
+        name: "女巫诅咒超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为30秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -280,8 +280,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Power Word Rebound', {
-        name: "Enable Power Word Rebound",
-        hint: "If enabled, this will present an appropriate dialog to users with the power word rebound spell, and automate application when used.",
+        name: "启用律令反弹",
+        hint: "若启用此功能，当角色身上存在律令反弹法术时，系统将向用户弹出相应对话框，并在使用时自动应用该效果。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -289,8 +289,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Power Word Rebound Timeout', {
-        name: "Power Word Rebound Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 30 seconds.",
+        name: "律令反弹超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为30秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -305,8 +305,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Enable Identify Restrictions', {
-        name: "Enable Identify Restrictions",
-        hint: "If enabled, this will prevent player characters from Identifying unidentified items except through the use of my Identify spell automation.",
+        name: "启用鉴定限制",
+        hint: "若启用此功能，将限制玩家角色鉴定未识别物品的方式，仅能通过我的鉴定术自动化功能实现。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -314,8 +314,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Identify Restriction Message', {
-        name: "Identify Restriction Message",
-        hint: "This is the message that will display to users if they are restricted.",
+        name: "鉴定限制提示信息",
+        hint: "这是当用户受到限制时将显示的信息。",
         scope: 'world',
         config: false,
         type: String,
@@ -323,8 +323,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'enableTimerFullAnim', {
-        name: "Enable Timer Full Bar Animation",
-        hint: "If enabled, this will cause the countdown timer animation for dialogs to cover the full title bar instead of the title bar border.",
+        name: "启用计时器全栏动画",
+        hint: "若启用，对话框的倒计时动画将覆盖整个标题栏，而非仅标题栏边框。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -332,8 +332,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'enable3prNoCombat', {
-        name: "Enable 3rd Party Reactions Outside Combat",
-        hint: "If enabled, this will allow 3rd party reactions to function while combat is not active.",
+        name: "在战斗外启用第三方反应",
+        hint: "若启用，将允许第三方反应功能在战斗未激活时生效。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -341,8 +341,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'hideTemplates', {
-        name: "Hide Templates",
-        hint: "This option is always enabled for Opportunity Attacks. If this setting is enabled, it will fully hide templates for other automations that use templates in my module. It will NOT hide templates for automations or templates created outside of my module.",
+        name: "隐藏测量版",
+        hint: "此项设置对于借机攻击始终启用。若启用，将完全隐藏本模块中其他使用测量版的自动化功能所产生的测量版。不会隐藏本模块之外的自动化功能或测量版。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -350,8 +350,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'debugEnabled', {
-        name: "Enable Debug",
-        hint: "If enabled, this will output console logs for the reaction validation process for troubleshooting.",
+        name: "启用调试",
+        hint: "若启用，将为反应验证过程输出控制台日志以进行故障排除。",
         scope: 'world',
         config: false,
         type: Boolean,
@@ -359,7 +359,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "disableSilveryBarbsOnNat20", {
-        name: "disableSilveryBarbsOnNat20",
+        name: "N20时禁用银光锐语",
         scope: "world",
         config: false,
         type: Boolean,
@@ -368,7 +368,7 @@ export function registerSettings() {
     });
     
     game.settings.register("gambits-premades", "enableSilveryBarbsOnNat20", {
-        name: "enableSilveryBarbsOnNat20",
+        name: "仅在N20时启用银光锐语",
         scope: "world",
         config: false,
         type: Boolean,
@@ -377,7 +377,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableAutoSucceedIndomitable", {
-        name: "enableAutoSucceedIndomitable",
+        name: "启用不屈自动成功",
         scope: "world",
         config: false,
         type: Boolean,
@@ -386,7 +386,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableProtectionOnSuccess", {
-        name: "enableProtectionOnSuccess",
+        name: "仅在攻击成功时启用守护",
         scope: "world",
         config: false,
         type: Boolean,
@@ -395,7 +395,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableCounterspellSpellPenetration", {
-        name: "enableCounterspellSpellPenetration",
+        name: "启用法术反制穿透",
         scope: "world",
         config: false,
         type: Boolean,
@@ -404,7 +404,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableMageSlayer", {
-        name: "enableMageSlayer",
+        name: "启用巫师杀手",
         scope: "world",
         config: false,
         type: Boolean,
@@ -413,8 +413,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Mage Slayer Timeout', {
-        name: "Mage Slayer Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "巫师杀手超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -429,7 +429,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableInstinctiveCharm", {
-        name: "enableInstinctiveCharm",
+        name: "启用直觉魅惑",
         scope: "world",
         config: false,
         type: Boolean,
@@ -438,8 +438,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Instinctive Charm Timeout', {
-        name: "Instinctive Charm Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "直觉魅惑超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -454,7 +454,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableRainOfCinders", {
-        name: "enableRainOfCinders",
+        name: "启用灰烬之雨",
         scope: "world",
         config: false,
         type: Boolean,
@@ -463,8 +463,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Rain of Cinders Timeout', {
-        name: "Rain of Cinders Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "灰烬之雨超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -479,7 +479,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableRestoreBalance", {
-        name: "enableRestoreBalance",
+        name: "启用归复平衡",
         scope: "world",
         config: false,
         type: Boolean,
@@ -488,8 +488,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Restore Balance Timeout', {
-        name: "Restore Balance Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "归复平衡超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -504,7 +504,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableLegendaryResistance", {
-        name: "enableLegendaryResistance",
+        name: "启用传奇抗性",
         scope: "world",
         config: false,
         type: Boolean,
@@ -513,8 +513,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Legendary Resistance Timeout', {
-        name: "Legendary Resistance Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "传奇抗性超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -529,7 +529,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableBurstOfIngenuity", {
-        name: "enableBurstOfIngenuity",
+        name: "启用灵光乍现",
         scope: "world",
         config: false,
         type: Boolean,
@@ -538,8 +538,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Burst of Ingenuity Timeout', {
-        name: "Burst of Ingenuity Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "灵光乍现超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -554,7 +554,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableTemporalShunt", {
-        name: "enableTemporalShunt",
+        name: "启用时刹流转",
         scope: "world",
         config: false,
         type: Boolean,
@@ -563,8 +563,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Temporal Shunt Timeout', {
-        name: "Temporal Shunt Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "时流刹转超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -579,7 +579,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableChronalShift", {
-        name: "enableChronalShift",
+        name: "启用时间变换",
         scope: "world",
         config: false,
         type: Boolean,
@@ -588,8 +588,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Chronal Shift Timeout', {
-        name: "Chronal Shift Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "时间变换超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -604,7 +604,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableMagicUsersNemesis", {
-        name: "enableMagicUsersNemesis",
+        name: "启用魔法使的克星",
         scope: "world",
         config: false,
         type: Boolean,
@@ -613,8 +613,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', "Magic-User's Nemesis Timeout", {
-        name: "Magic-User's Nemesis Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "魔法使的克星超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -629,7 +629,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableDreadCounterspell", {
-        name: "enableDreadCounterspell",
+        name: "启用恐惧反制",
         scope: "world",
         config: false,
         type: Boolean,
@@ -638,8 +638,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', "Dread Counterspell Timeout", {
-        name: "Dread Counterspell Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "恐惧反制超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -654,7 +654,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableTaleOfHubris", {
-        name: "enableTaleOfHubris",
+        name: "启用盛极必衰",
         scope: "world",
         config: false,
         type: Boolean,
@@ -663,8 +663,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Tale of Hubris Timeout', {
-        name: "Tale of Hubris Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "盛极必衰超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -679,7 +679,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableFlashOfGenius", {
-        name: "enableFlashOfGenius",
+        name: "启用灵光一闪",
         scope: "world",
         config: false,
         type: Boolean,
@@ -688,8 +688,8 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'Flash of Genius Timeout', {
-        name: "Flash of Genius Timeout",
-        hint: "Enter custom number (in seconds). Default timeout value is 15 seconds.",
+        name: "灵光一闪超时时间",
+        hint: "输入自定义数值（单位：秒）。默认超时时间为15秒。",
         scope: 'world',
         config: false,
         type: String,
@@ -704,7 +704,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "disableCuttingWordsMaxMiss", {
-        name: "disableCuttingWordsMaxMiss",
+        name: "禁用语出惊人最大失手",
         scope: "world",
         config: false,
         type: Boolean,
@@ -713,7 +713,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableRegionWrapping", {
-        name: "enableRegionWrapping",
+        name: "启用区域环绕",
         scope: "world",
         config: false,
         type: Boolean,
@@ -722,7 +722,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'primaryGM', {
-        name: "primaryGM",
+        name: "首选GM",
         hint: "",
         scope: 'world',
         config: false,
@@ -731,7 +731,7 @@ export function registerSettings() {
     });
 
     game.settings.register("gambits-premades", "enableTokenMovementSpeed", {
-        name: "enableTokenMovementSpeed",
+        name: "启用Token移动速度调整",
         scope: "world",
         config: false,
         type: Boolean,
@@ -743,7 +743,7 @@ export function registerSettings() {
     });
 
     game.settings.register('gambits-premades', 'tokenMovementSpeed', {
-        name: "tokenMovementSpeed",
+        name: "Token移动速度",
         hint: "",
         scope: 'world',
         config: false,
@@ -756,9 +756,9 @@ export function registerSettings() {
     });
 
     game.settings.registerMenu('gambits-premades', 'patreonSupport', {
-        name: "Patreon Support",
+        name: "Patreon 支持",
         label: "Gambit's Lounge",
-        hint: "If you'd like to support me, Gambit! Subscribing helps support development of this and my other free modules, and also gets you access to my premium modules Gambit's FXMaster+, Gambit's Asset Previewer, and Gambit's Image Viewer!",
+        hint: "如果你想支持我Gambit! 赞助将对本模组及其它免费模组的开发提供帮助，并且将会获得我的付费模组 Gambit's FXMaster+, Gambit's Asset Previewer,和 Gambit's Image Viewer的使用权!",
         icon: "fas fa-card-spade",
         scope: 'world',
         config: true,
@@ -767,9 +767,9 @@ export function registerSettings() {
     });
 
     game.settings.registerMenu('gambits-premades', 'generalSettings', {
-        name: game.i18n.localize("General Settings"),
-        label: game.i18n.localize("General Settings"),
-        hint: game.i18n.localize("Mirror Dialog, Identify Restriction, etc"),
+        name: game.i18n.localize("一般设置"),
+        label: game.i18n.localize("一般设置"),
+        hint: game.i18n.localize("镜像对话框，鉴定限制等"),
         icon: 'fas fa-cogs',
         scope: 'world',
         config: true,
@@ -778,9 +778,9 @@ export function registerSettings() {
     });
 
     game.settings.registerMenu('gambits-premades', 'spells', {
-        name: game.i18n.localize("Spells"),
-        label: game.i18n.localize("Enable Spells"),
-        hint: game.i18n.localize("Counterspell, Silvery Barbs, etc"),
+        name: game.i18n.localize("法术"),
+        label: game.i18n.localize("启用法术"),
+        hint: game.i18n.localize("法术反制，银光锐语等"),
         icon: 'fas fa-magic',
         scope: 'world',
         config: true,
@@ -789,9 +789,9 @@ export function registerSettings() {
     });
 
     game.settings.registerMenu('gambits-premades', 'classFeatures', {
-        name: game.i18n.localize("Class Features"),
-        label: game.i18n.localize("Enable Class Features"),
-        hint: game.i18n.localize("Cutting Words, Interception, Poetry in Misery, etc"),
+        name: game.i18n.localize("职业特性"),
+        label: game.i18n.localize("启用职业特性"),
+        hint: game.i18n.localize("语出惊人，拦截，惨中取意等"),
         icon: 'fas fa-book',
         scope: 'world',
         config: true,
@@ -800,9 +800,9 @@ export function registerSettings() {
     });
 
     game.settings.registerMenu('gambits-premades', 'genericFeatures', {
-        name: game.i18n.localize("Generic Features"),
-        label: game.i18n.localize("Enable Generic Features"),
-        hint: game.i18n.localize("Opportunity Attack, Sentinel, etc"),
+        name: game.i18n.localize("通用特性"),
+        label: game.i18n.localize("启用通用特性"),
+        hint: game.i18n.localize("借机攻击，哨兵等"),
         icon: 'fas fa-globe',
         scope: 'world',
         config: true,
@@ -812,9 +812,9 @@ export function registerSettings() {
 
     
     game.settings.registerMenu('gambits-premades', 'monsterFeatures', {
-        name: game.i18n.localize("Monster Features"),
-        label: game.i18n.localize("Enable Monster Features"),
-        hint: game.i18n.localize("Monster Features"),
+        name: game.i18n.localize("怪物特性"),
+        label: game.i18n.localize("启用怪物特性"),
+        hint: game.i18n.localize("怪物特性"),
         icon: 'fas fa-dragon',
         scope: 'world',
         config: true,
@@ -920,7 +920,7 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
   static DEFAULT_OPTIONS = {
     id: "classFeaturesSettingsMenu",
     window: {
-      title: "Enable Class Features"
+      title: "启用职业特性"
     }
   };
 
@@ -931,123 +931,123 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
     const definitions = [
       {
         id: "chronalShift",
-        name: "Chronal Shift",
-        description: "Dialog for Chronurgy Wizards' Chronal Shift.",
+        name: "时间变换",
+        description: "为时间学派法师时间变换特性提供对话框",
         boolKey: "enableChronalShift",
         timeoutKey: "Chronal Shift Timeout"
       },
       {
         id: "cuttingWords",
-        name: "Cutting Words",
-        description: "Dialog for College of Lore Bards' Cutting Words.",
+        name: "语出惊人",
+        description: "为逸闻学院吟游诗人的“语出惊人”提供对话框。",
         boolKey: "Enable Cutting Words",
         timeoutKey: "Cutting Words Timeout",
         children: [
           {
             id: "disableCuttingWordsMaxMiss",
-            name: "Disable Cutting Words Max Miss",
-            description: "Skip prompt if max bardic die wouldn't effect hit.",
+            name: "禁用语出惊人最大失误时触发",
+            description: "当最大吟游骰子也无法影响命中时跳过提示。",
             boolKey: "disableCuttingWordsMaxMiss"
           }
         ]
       },
       {
         id: "interception",
-        name: "Interception",
-        description: "Dialog for Paladins/Fighters' Interception.",
+        name: "拦截",
+        description: "为圣武士/战士的“拦截”提供对话框。",
         boolKey: "Enable Interception",
         timeoutKey: "Interception Timeout"
       },
       {
         id: "protection",
-        name: "Protection",
-        description: "Dialog for Paladins/Fighters' Protection.",
+        name: "守护",
+        description: "为圣武士/战士的“守护”提供对话框。",
         boolKey: "Enable Protection",
         timeoutKey: "Protection Timeout",
         children: [
           {
             id: "enableProtectionOnSuccess",
-            name: "Enable Protection On Success",
-            description: "Only trigger on a successful attack.",
+            name: "成功时启用守护",
+            description: "仅在攻击成功时触发。",
             boolKey: "enableProtectionOnSuccess"
           }
         ]
       },
       {
         id: "flashOfGenius",
-        name: "Flash of Genius",
-        description: "Dialog for Artificers Flash of Genius.",
+        name: "灵光一闪",
+        description: "为奇械师的“灵光一闪”提供对话框。",
         boolKey: "enableFlashOfGenius",
         timeoutKey: "Flash of Genius Timeout"
       },
       {
         id: "indomitable",
-        name: "Indomitable",
-        description: "Dialog for Fighters' Indomitable.",
+        name: "不屈",
+        description: "为战士的“不屈”提供对话框。",
         boolKey: "Enable Indomitable",
         timeoutKey: "Indomitable Timeout",
         children: [
           {
             id: "enableAutoSucceedIndomitable",
-            name: "Enable Auto Succeed Indomitable",
-            description: "Auto-succeed on use.",
+            name: "启用不屈自动成功",
+            description: "使用时自动成功。",
             boolKey: "enableAutoSucceedIndomitable"
           }
         ]
       },
       {
         id: "instinctiveCharm",
-        name: "Instinctive Charm",
-        description: "Dialog for Enchantment Wizards' Instinctive Charm.",
+        name: "直觉魅惑",
+        description: "为惑控学派法师的“直觉魅惑”提供对话框。",
         boolKey: "enableInstinctiveCharm",
         timeoutKey: "Instinctive Charm Timeout"
       },
       {
         id: "magicUsersNemesis",
-        name: "Magic-User's Nemesis",
-        description: "Dialog for Monster Slayer Rangers'.",
+        name: "魔法使的克星",
+        description: "为怪物杀手游侠的魔法使的克星提供对话框。",
         boolKey: "enableMagicUsersNemesis",
         timeoutKey: "Magic-User's Nemesis Timeout"
       },
       {
         id: "poetryInMisery",
-        name: "Poetry in Misery",
-        description: "Dialog for College of Tragedy Bards'.",
+        name: "惨中取意",
+        description: "为悲剧学院吟游诗人的“惨中取意”提供对话框。",
         boolKey: "Enable Poetry in Misery",
         timeoutKey: "Poetry in Misery Timeout"
       },
       {
         id: "rainOfCinders",
-        name: "Rain of Cinders",
-        description: "Dialog for Roiling Hearth Witches'.",
+        name: "灰烬之雨",
+        description: "为沸炉巫团女巫的灰烬之雨提供对话框。",
         boolKey: "enableRainOfCinders",
         timeoutKey: "Rain of Cinders Timeout"
       },
       {
         id: "restoreBalance",
-        name: "Restore Balance",
-        description: "Dialog for Clockwork Soul Sorcerers'.",
+        name: "归复平衡",
+        description: "为时械术士的归复平衡特性提供对话框",
         boolKey: "enableRestoreBalance",
         timeoutKey: "Restore Balance Timeout"
       },
       {
         id: "riposte",
-        name: "Riposte",
-        description: "Dialog for Battle Master Fighters' Riposte.",
+        name: "反击",
+        description: "为战斗大师战士的“反击”提供对话框。",
         boolKey: "Enable Riposte",
         timeoutKey: "Riposte Timeout"
       },
       {
         id: "taleOfHubris",
-        name: "Tale of Hubris",
-        description: "Dialog for College of Tragedy Bards'.",
+        name: "盛极必衰",
+        description: "为悲剧学院吟游诗人的“盛极必衰”提供对话框。",
         boolKey: "enableTaleOfHubris",
         timeoutKey: "Tale of Hubris Timeout"
       },
       {
         id: "witchesHex",
-        name: "Witches Hex",
-        description: "Dialog for Roiling Hearth Witches' Hex.",
+        name: "女巫诅咒",
+        description: "为女巫的女巫诅咒提供对话框。",
         boolKey: "Enable Witches Hex",
         timeoutKey: "Witches Hex Timeout"
       }
@@ -1079,7 +1079,7 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
       features,
       hasTimeoutColumn,
       buttons: [
-        { type: "submit", icon: "fa-solid fa-save", label: "Save Settings" }
+        { type: "submit", icon: "fa-solid fa-save", label: "保存设置" }
       ]
     });
   }
@@ -1092,7 +1092,7 @@ export class GenericFeatureSettingsMenu extends BaseSettingsMenu {
   static DEFAULT_OPTIONS = {
     id: "genericFeatureSettingsMenu",
     window: {
-      title: "Enable Generic Features"
+      title: "启用通用特性"
     },
   };
 
@@ -1101,10 +1101,10 @@ export class GenericFeatureSettingsMenu extends BaseSettingsMenu {
     let hasTimeoutColumn = true;
 
     const definitions = [
-      { id: "opportunityAttack", name: "Opportunity Attack", description: "Automatically enables Opportunity Attacks for combatants in combat.", boolKey: "Enable Opportunity Attack", timeoutKey: "Opportunity Attack Timeout" },
-      { id: "sentinel", name: "Sentinel", description: "Presents a dialog to players with the Sentinel feat when an enemy attacks an ally within range.", boolKey: "Enable Sentinel", timeoutKey: "Sentinel Timeout" },
-      { id: "mageSlayer", name: "Mage Slayer", description: "Presents a dialog to players with the Mage Slayer feat.", boolKey: "enableMageSlayer", timeoutKey: "Mage Slayer Timeout" },
-      { id: "legendaryResistance", name: "Legendary Resistance", description: "Presents a dialog for monsters Legendary Resistance feature.", boolKey: "enableLegendaryResistance", timeoutKey: "Legendary Resistance Timeout" }
+      { id: "opportunityAttack", name: "借机攻击", description: "自动为战斗中的参战者启用借机攻击。", boolKey: "Enable Opportunity Attack", timeoutKey: "Opportunity Attack Timeout" },
+      { id: "sentinel", name: "哨兵", description: "当敌人攻击范围内的盟友时，向拥有“哨兵”专长的玩家呈现对话框。", boolKey: "Enable Sentinel", timeoutKey: "Sentinel Timeout" },
+      { id: "mageSlayer", name: "巫师杀手", description: "向拥有“巫师杀手”专长的玩家呈现对话框。", boolKey: "enableMageSlayer", timeoutKey: "Mage Slayer Timeout" },
+      { id: "legendaryResistance", name: "传奇抗性", description: "为拥有“传奇抗性”特性的怪物呈现对话框。", boolKey: "enableLegendaryResistance", timeoutKey: "Legendary Resistance Timeout" }
     ];
 
     const features = definitions.map(def => ({
@@ -1121,7 +1121,7 @@ export class GenericFeatureSettingsMenu extends BaseSettingsMenu {
       features: features,
       hasTimeoutColumn,
       buttons:  [
-        { type: "submit", icon: "fa-solid fa-save", label: "Save Settings" }
+        { type: "submit", icon: "fa-solid fa-save", label: "保存设置" }
       ]
     });
   }
@@ -1134,7 +1134,7 @@ export class SpellSettingsMenu extends BaseSettingsMenu {
   static DEFAULT_OPTIONS = {
     id: "spellSettingsMenu",
     window: {
-      title: "Enable Spells"
+      title: "启用法术"
     }
   };
 
@@ -1145,25 +1145,25 @@ export class SpellSettingsMenu extends BaseSettingsMenu {
     const definitions = [
       {
         id: "counterspell",
-        name: "Counterspell",
-        description: "Presents a dialog to players with Counterspell.",
+        name: "法术反制",
+        description: "向拥有“法术反制”法术的玩家呈现对话框。",
         boolKey: "Enable Counterspell",
         timeoutKey: "Counterspell Timeout",
         children: [ { id: "counterspellSpellPenetration", name: "Spell Penetration", description: "Enable optional Bloodied & Bruised feature Spell Penetration.", boolKey: "enableCounterspellSpellPenetration" } ]
       },
       {
         id: "silveryBarbs",
-        name: "Silvery Barbs",
-        description: "Presents a dialog to players with Silvery Barbs.",
+        name: "银光锐语",
+        description: "向拥有“银光锐语”法术的玩家呈现对话框。",
         boolKey: "Enable Silvery Barbs",
         timeoutKey: "Silvery Barbs Timeout",
         children: [
-          { id: "disableSilveryBarbsOnNat20", name: "Disable on Critical", description: "Disable on a Critical Attack Roll.", boolKey: "disableSilveryBarbsOnNat20" },
-          { id: "enableSilveryBarbsOnNat20", name: "Enable on Critical", description: "Enable only on a Critical Attack Roll.", boolKey: "enableSilveryBarbsOnNat20" }
+          { id: "disableSilveryBarbsOnNat20", name: "重击时禁用", description: "在重击攻击掷骰时禁用。", boolKey: "disableSilveryBarbsOnNat20" },
+          { id: "enableSilveryBarbsOnNat20", name: "重击时启用", description: "仅在攻击掷骰重击时启用", boolKey: "enableSilveryBarbsOnNat20" }
         ]
       },
       { id: "powerWordRebound", name: "Power Word Rebound", description: "Presents a dialog to players with Power Word Rebound.", boolKey: "Enable Power Word Rebound", timeoutKey: "Power Word Rebound Timeout" },
-      { id: "temporalShunt", name: "Temporal Shunt", description: "Presents a dialog to players with Temporal Shunt.", boolKey: "enableTemporalShunt", timeoutKey: "Temporal Shunt Timeout" }
+      { id: "temporalShunt", name: "时流刹转", description: "向拥有“时流刹转”法术的玩家呈现对话框。", boolKey: "enableTemporalShunt", timeoutKey: "Temporal Shunt Timeout" }
     ];
 
     const features = definitions.map(def => {
@@ -1192,7 +1192,7 @@ export class SpellSettingsMenu extends BaseSettingsMenu {
       features,
       hasTimeoutColumn,
       buttons: [
-        { type: "submit", icon: "fa-solid fa-save", label: "Save Settings" }
+        { type: "submit", icon: "fa-solid fa-save", label: "保存设置" }
       ]
     });
   }
@@ -1205,7 +1205,7 @@ export class GeneralSettingsMenu extends BaseSettingsMenu {
   static DEFAULT_OPTIONS = {
     id: "generalSettingsMenu",
     window: {
-      title: "General Settings"
+      title: "通用设置"
     }
   };
 
@@ -1213,14 +1213,14 @@ export class GeneralSettingsMenu extends BaseSettingsMenu {
     let context = await super._prepareContext(options);
 
     const definitions = [
-      { id: "enable3prNoCombat", name: "Enable 3rd Party Reactions Outside Combat", description: "Allows 3rd party reactions to function while combat is not active.", boolKey: "enable3prNoCombat" },
-      { id: "enableIdentifyRestrictions", name: "Enable Identify Restrictions", description: "Prevents players from Identifying items except through the use of my Identify spell.", boolKey: "Enable Identify Restrictions", children: [{ id: "identifyRestrictionMessage", name: "Identify Restriction Message", description: "Custom message that will display to users if they are restricted.", type: "String", boolKey: "Identify Restriction Message" }] },
-      { id: "enableRegionWrapping", name: "Enable Region Wrapping", description: "Replaces Foundry default region behavior testing token center points only with multi-point tests to better match the 5e ruleset (Requires Reload).", boolKey: "enableRegionWrapping" },
-      { id: "enableTimerFullAnim", name: "Enable Timer Full Bar Animation", description: "Modify the countdown timer animation for dialogs to cover the full title bar instead of the title bar border.", boolKey: "enableTimerFullAnim" },
-      { id: "hideTemplates", name: "Hide Templates", description: "Hide templates after placement.", boolKey: "hideTemplates" },
-      { id: "mirror3rdPartyDialogForGMs", name: "Mirror 3rd Party Dialog for GMs", description: "3rd party dialog's will be sent to the GM and the player so that either party can interact with the dialog to use/dismiss/pause it.", boolKey: "Mirror 3rd Party Dialog for GMs" },
-      { id: "tokenMovementSpeed", name: "Token Movement Speed", description: "Numeric value for token movement animation speed. Default Foundry speed is 6.", boolKey: "enableTokenMovementSpeed", timeoutKey: "tokenMovementSpeed" },
-      { id: "debugEnabled", name: "Enable Debugging", description: "Enable console logs for the reaction validation process for troubleshooting.", boolKey: "debugEnabled" }
+      { id: "enable3prNoCombat", name: "在战斗外启用第三方反应", description: "允许第三方反应在战斗未激活时生效。", boolKey: "enable3prNoCombat" },
+      { id: "enableIdentifyRestrictions", name: "启用鉴定限制", description: "防止玩家通过除本模块的鉴定术自动化功能以外的任何方式鉴定物品。", boolKey: "Enable Identify Restrictions", children: [{ id: "identifyRestrictionMessage", name: "鉴定限制信息", description: "当用户受到限制时将显示的自定义信息。", type: "String", boolKey: "Identify Restriction Message" }] },
+      { id: "enableRegionWrapping", name: "启用区域环绕", description: "替换Foundry默认的仅测试Token中心点的区域行为为多点测试，以更好地匹配5版规则集（需要重载）。", boolKey: "enableRegionWrapping" },
+      { id: "enableTimerFullAnim", name: "启用计时器全栏动画", description: "修改对话框的倒计时动画，使其覆盖整个标题栏而非仅标题栏边框。", boolKey: "enableTimerFullAnim" },
+      { id: "hideTemplates", name: "隐藏测量版", description: "放置后隐藏测量版。", boolKey: "hideTemplates" },
+      { id: "mirror3rdPartyDialogForGMs", name: "GM第三方对话框镜像", description: "第三方对话框将同时发送给游戏主持人与玩家，以便任意一方均可操作对话框以使用/关闭/暂停它。", boolKey: "Mirror 3rd Party Dialog for GMs" },
+      { id: "tokenMovementSpeed", name: "Token移动速度", description: "Token移动动画速度的数值。Foundry默认速度为6。", boolKey: "enableTokenMovementSpeed", timeoutKey: "tokenMovementSpeed" },
+      { id: "debugEnabled", name: "启用调试", description: "启用反应验证过程的控制台日志以进行故障排除。", boolKey: "debugEnabled" }
     ];
 
     const hasTimeoutColumn = definitions.some(d => !!d.timeoutKey);
@@ -1257,7 +1257,7 @@ export class GeneralSettingsMenu extends BaseSettingsMenu {
       features,
       hasTimeoutColumn,
       buttons: [
-        { type: "submit", icon: "fa-solid fa-save", label: "Save Settings" }
+        { type: "submit", icon: "fa-solid fa-save", label: "保存设置" }
       ]
     });
   }
@@ -1270,7 +1270,7 @@ export class MonsterFeaturesSettingsMenu extends BaseSettingsMenu {
   static DEFAULT_OPTIONS = {
     id: "monsterFeaturesSettingsMenu",
     window: {
-      title: "Enable Monster Features"
+      title: "启用怪物特性"
     }
   };
 
@@ -1279,8 +1279,8 @@ export class MonsterFeaturesSettingsMenu extends BaseSettingsMenu {
     let hasTimeoutColumn = true;
 
     const definitions = [
-      { id: "burstOfIngenuity", name: "Burst of Ingenuity", description: "Presents a dialog for monsters with Burst of Ingenuity.", boolKey: "enableBurstOfIngenuity", timeoutKey: "Burst of Ingenuity Timeout" },
-      { id: "dreadCounterspell", name: "Dread Counterspell", description: "Presents a dialog for Vecna's Dread Counterspell.", boolKey: "enableDreadCounterspell", timeoutKey: "Dread Counterspell Timeout" }
+      { id: "burstOfIngenuity", name: "灵光乍现", description: "为拥有“灵光乍现”特性的怪物呈现对话框。", boolKey: "enableBurstOfIngenuity", timeoutKey: "Burst of Ingenuity Timeout" },
+      { id: "dreadCounterspell", name: "恐惧反制", description: "为维克那的“恐惧法术反制”呈现对话框。", boolKey: "enableDreadCounterspell", timeoutKey: "Dread Counterspell Timeout" }
     ];
 
     const features = definitions.map(def => {
@@ -1309,7 +1309,7 @@ export class MonsterFeaturesSettingsMenu extends BaseSettingsMenu {
       features,
       hasTimeoutColumn,
       buttons: [
-        { type: "submit", icon: "fa-solid fa-save", label: "Save Settings" }
+        { type: "submit", icon: "fa-solid fa-save", label: "保存设置" }
       ]
     });
   }

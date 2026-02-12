@@ -36,13 +36,13 @@ export async function elementalAffinity2024({ speaker, actor, token, character, 
             let initialTimeLeft = 15;
             let dialogId = "elementalaffinity";
             const dialogTitlePrimary = `${actor.name} | ${item.name}`;
-            const dialogTitleGM = `Waiting for ${actor.name}'s selection | ${item.name}`;
+            const dialogTitleGM = `等待 ${actor.name} 选择 | ${item.name}`;
 
             let dialogContent = `
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Choose the enemy to receive additional ${damageType} damage from your Elemental Affinity below:</p>
+                            <p class="gps-dialog-paragraph">从下列敌人中选择将要从你的元素亲合受到额外 ${damageType} 伤害的目标：</p>
                             <div>
                                 <div class="gps-dialog-flex">
                                     <label for="enemy-token" class="gps-dialog-label">Target:</label>

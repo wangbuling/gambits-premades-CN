@@ -36,7 +36,7 @@ export async function ballBearings({tokenUuid, regionUuid, regionScenario, origi
                 <div class="gps-dialog-content">
                     <div>
                         <div class="gps-dialog-flex">
-                            <p class="gps-dialog-paragraph">${token.actor.name} moved through ball bearings, are they moving at half speed?</p>
+                            <p class="gps-dialog-paragraph">${token.actor.name} 从滚珠上走过，他们是以半速前进的吗?</p>
                             <div id="image-container" class="gps-dialog-image-container">
                                 <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                             </div>

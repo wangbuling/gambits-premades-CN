@@ -3,14 +3,14 @@ export async function bootsOfSpeed({ speaker, actor, token, character, item, arg
         if(!actor.appliedEffects.some(e => e.name === "Boots of Speed")) return;
 
         await foundry.applications.api.DialogV2.wait({
-            window: { title: "Boots of Speed" },
+            window: { title: "速度之靴" },
             content: `
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Would you like to disable Boots of Speed?</p>
+                                    <p class="gps-dialog-paragraph">你是否要终止速度之靴的效应?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img src="${item.img}" class="gps-dialog-image">
                                     </div>
@@ -23,7 +23,7 @@ export async function bootsOfSpeed({ speaker, actor, token, character, item, arg
             buttons: [
             {
                 action: "Yes",
-                label: "Yes",
+                label: "是",
                 callback: async () => {
                     await updateEffect(actor,item);
                     workflow.aborted = true;
@@ -31,7 +31,7 @@ export async function bootsOfSpeed({ speaker, actor, token, character, item, arg
             },
             {
                 action: "No",
-                label: "No",
+                label: "否",
                 callback: async () => {
                     return false;
                 }

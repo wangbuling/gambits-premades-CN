@@ -3,7 +3,7 @@ export async function riposte({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "73ae66c4-4bd4-41cd-b75a-0056ef8b670c";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Maneuvers: Riposte";
+    let itemName = "战技：反击";
     let dialogId = gpsUuid;
     const actionTypes = ["mwak"];
     if (!actionTypes.some(type => workflow.activity?.actionType?.includes(type))) {
@@ -30,7 +30,7 @@ export async function riposte({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         // Check valid weapons
@@ -88,7 +88,7 @@ export async function riposte({workflowData,workflowType,workflowCombat}) {
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Would you like to use your reaction to attack? This will initiate a use of your Superiority Die for the Riposte maneuver. Choose your weapon below.</p>
+                        <p class="gps-dialog-paragraph">你是否要使用反应攻击？这会因反击战技而消耗你一枚卓越骰。从你的以下武器中选择使用：</p>
                         <div>
                             <div class="gps-dialog-flex">
                                 <label for="item-select_${dialogId}" class="gps-dialog-label">Weapon:</label>
@@ -114,7 +114,7 @@ export async function riposte({workflowData,workflowType,workflowCombat}) {
             </div>
         `;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for an attack triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以使用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
         let result;

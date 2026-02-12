@@ -66,7 +66,7 @@ export async function freeSpellUse({ item, actor, activity }) {
     const remainingText = isCounterMode ? (remaining > 1 ? `You have ${remaining} uses remaining.` : remaining === 1 ? `You have ${remaining} use remaining.` : ``) : `This grants one free use ${restModeName === "Daily" ? restModeName : `per ${restModeName}`}.`;
 
     const result = await foundry.applications.api.DialogV2.wait({
-        window: { title: `Free ${item.name} Use` },
+        window: { title: `免费 ${item.name} 使用` },
         content: `
         <div class="gps-dialog-container">
             <div class="gps-dialog-section">
@@ -74,7 +74,7 @@ export async function freeSpellUse({ item, actor, activity }) {
                 <div>
                 <div class="gps-dialog-flex">
                     <p class="gps-dialog-paragraph">
-                    Would you like to activate a free use of ${item.name}? It will be cast at its base level.
+                    你是否要免费使用一次 ${item.name}? 它将以基础法术环级施展。
                     ${remainingText}
                     </p>
                     <div id="image-container" class="gps-dialog-image-container">
@@ -89,7 +89,7 @@ export async function freeSpellUse({ item, actor, activity }) {
         buttons: [
         {
             action: "Yes",
-            label: "Yes",
+            label: "是",
             callback: async () => {
             if (isCounterMode) {
                 const prevCount = actor.appliedEffects.find(e => e.name === effectNameCurrent);
@@ -118,7 +118,7 @@ export async function freeSpellUse({ item, actor, activity }) {
             return true;
             }
         },
-        { action: "No", label: "No", callback: async () => false }
+        { action: "No", label: "否", callback: async () => false }
         ],
         close: async () => false,
         rejectClose: false
@@ -788,7 +788,7 @@ export async function process3rdPartyReactionDialog({
     buttons: [
       {
         action: "yes",
-        label: "Yes",
+        label: "是",
         icon: "fas fa-check",
         classes: ["default"],
         callback: async (event, button, dialog) => {
@@ -858,7 +858,7 @@ export async function process3rdPartyReactionDialog({
       },
       {
         action: "no",
-        label: `No`,
+        label: `否`,
         icon: "fas fa-times",
         classes: ["default"],
         default: true,
@@ -1446,14 +1446,14 @@ export async function ritualSpellUse({ workflowUuid }) {
     if(!workflow.item.system.properties.has("ritual")) return;
 
     await foundry.applications.api.DialogV2.wait({
-        window: { title: `Ritual ${workflow.item.name} Use` },
+        window: { title: `仪式施法 ${workflow.item.name} ` },
         content: `
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to cast ${workflow.item.name} ritually? This will increase its cast time (${workflow.item.system.activation.cost} ${workflow.item.system.activation.type}) by 10 minutes.</p>
+                                <p class="gps-dialog-paragraph">你是否要以仪式施展 ${workflow.item.name} ? 这将延长其施法时间 (${workflow.item.system.activation.cost} ${workflow.item.system.activation.type}) 10分钟。</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img src="${workflow.item.img}" class="gps-dialog-image">
                                 </div>
@@ -1465,7 +1465,7 @@ export async function ritualSpellUse({ workflowUuid }) {
         `,
         buttons: [{
             action: "Yes",
-            label: "Yes",
+            label: "是",
             callback: async (event, button, dialog) => {
                 //workflow.config.spell = workflow.config.spell || {};
                 workflow.config.consume = workflow.config.consume || {};
@@ -1485,7 +1485,7 @@ export async function ritualSpellUse({ workflowUuid }) {
         },
         {
             action: "No",
-            label: "No",
+            label: "否",
             callback: async () => false
         }],
         close: async (event, dialog) => {

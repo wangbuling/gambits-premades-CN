@@ -3,7 +3,7 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "82548541-757a-4d56-961a-3f86bb8a14e6";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Fighting Style: Protection";
+    let itemName = "战斗风格：守护";
     let dialogId = gpsUuid;
     let target = workflow.targets.first();
     let enableProtectionOnSuccess = MidiQOL.safeGetGameSetting('gambits-premades', 'enableProtectionOnSuccess');
@@ -21,7 +21,7 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         if (target.document.uuid === validTokenPrimary.document.uuid) continue;
@@ -32,7 +32,7 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use <b>${itemProperName}</b> to disadvantage the attack against <b>${target.actor.name}</b>?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用 <b>${itemProperName}</b> 使对 <b>${target.actor.name}</b> 的攻击具有劣势?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                 </div>
@@ -48,7 +48,7 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
             </div>
         `;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for an attack triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以对此攻击反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
         let result;
@@ -99,8 +99,8 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
                     await workflow.setAttackRoll(reroll);
                     workflow.workflowOptions.noOnUseMacro = saveSetting;
     
-                    if(target.actor.system.attributes.ac.value > reroll.total) content = `<span style='text-wrap: wrap;'>You use your Fighting Style - Protection to turn the advantage roll into a straight roll, and cause the target to miss ${target.actor.name}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                    else content = `<span style='text-wrap: wrap;'>You use your Fighting Style - Protection to turn the advantage roll into a straight roll, but the target still hits ${target.actor.name}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    if(target.actor.system.attributes.ac.value > reroll.total) content = `<span style='text-wrap: wrap;'>你使用了守护战斗风格令对方优劣相抵，并使对方对 ${target.actor.name} 的攻击失手。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    else content = `<span style='text-wrap: wrap;'>你使用了守护战斗风格令对方优劣相抵，但对方对 ${target.actor.name} 的攻击仍然命中。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
             
                     let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
                     let chatData = {
@@ -121,8 +121,8 @@ export async function protection({workflowData,workflowType,workflowCombat}) {
             
                     let content;
             
-                    if(target.actor.system.attributes.ac.value > reroll.total) content = `<span style='text-wrap: wrap;'>You use your Fighting Style - Protection and cause the target to miss ${target.actor.name}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                    else content = `<span style='text-wrap: wrap;'>You use your Fighting Style - Protection but the target still hits ${target.actor.name}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    if(target.actor.system.attributes.ac.value > reroll.total) content = `<span style='text-wrap: wrap;'>你使用了守护战斗风格，并使对方对 ${target.actor.name} 的攻击失手。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    else content = `<span style='text-wrap: wrap;'>你使用了守护战斗风格，但对方对 ${target.actor.name} 的攻击仍然命中。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
             
                     let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
                     let chatData = {

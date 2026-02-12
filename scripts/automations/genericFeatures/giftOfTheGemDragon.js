@@ -12,14 +12,14 @@ export async function giftOfTheGemDragon({ speaker, actor, token, character, ite
 
         if(!activity.save?.dc?.calculation && !activity.save?.dc?.formula) {
             await foundry.applications.api.DialogV2.wait({
-                window: { title: 'Gift of the Gem Dragon Ability' },
+                window: { title: '宝石龙赠礼' },
                 content: `
                     <div class="gps-dialog-container">
                         <div class="gps-dialog-section">
                             <div class="gps-dialog-content">
                                 <div>
                                     <div class="gps-dialog-flex">
-                                        <p class="gps-dialog-paragraph">Which ability score did you increase with Gift of the Gem Dragon?</p>
+                                        <p class="gps-dialog-paragraph">你因宝石龙的赠礼提升的是哪个属性?</p>
                                         <div id="image-container" class="gps-dialog-image-container">
                                             <img src="${item.img}" class="gps-dialog-image">
                                         </div>
@@ -31,21 +31,21 @@ export async function giftOfTheGemDragon({ speaker, actor, token, character, ite
                 `,
                 buttons: [{
                     action: "Intelligence",
-                    label: "Intelligence",
+                    label: "智力",
                     callback: async (event, button, dialog) => {
                         await activity.update({"save.dc.calculation": "int"});
                     }
                 },
                 {
                     action: "Wisdom",
-                    label: "Wisdom",
+                    label: "感知",
                     callback: async (event, button, dialog) => {
                         await activity.update({"save.dc.calculation": "wis"});
                     }
                 },
                 {
                     action: "Charisma",
-                    label: "Charisma",
+                    label: "魅力",
                     callback: async (event, button, dialog) => {
                         await activity.update({"save.dc.calculation": "cha"});
                     }
@@ -59,7 +59,7 @@ export async function giftOfTheGemDragon({ speaker, actor, token, character, ite
         let initialTimeLeft = 15;
         let dialogId = "giftofthegemdragon";
         const dialogTitlePrimary = `${actor.name} | ${item.name}`;
-        const dialogTitleGM = `Waiting for ${actor.name}'s selection | ${item.name}`;
+        const dialogTitleGM = `等待 ${actor.name} 选择 | ${item.name}`;
 
         let dialogContent = `
             <div class="gps-dialog-container">
@@ -67,7 +67,7 @@ export async function giftOfTheGemDragon({ speaker, actor, token, character, ite
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">You have been damaged, would you like use your reaction to initiate <b>Telekinetic Reprisal</b> to damage and potentially push the attacker?</p>
+                                <p class="gps-dialog-paragraph">你被伤害了，你是否要使用反应施展 <b>念力报复</b> 伤害并推离伤害你的生物?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

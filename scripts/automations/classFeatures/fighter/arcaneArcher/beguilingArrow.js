@@ -18,7 +18,7 @@ export async function beguilingArrow({ speaker, actor, token, character, item, a
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Select which ally you would like the target to be Charmed by:</p>
+                        <p class="gps-dialog-paragraph">选择你希望目标被哪位盟友魅惑。</p>
                         <div>
                             <div class="gps-dialog-flex">
                                 <label for="ally-token" class="gps-dialog-label"Ally:</label>
@@ -68,7 +68,7 @@ export async function beguilingArrow({ speaker, actor, token, character, item, a
             ];
             await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: allyToken.actor.uuid, effects: effectData });
 
-            let content = `<span style='text-wrap: wrap;'>You use Beguiling Arrow and cause the target to be Charmed by ${allyToken.actor.name}.<br/><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let content = `<span style='text-wrap: wrap;'>你使用欺诈矢，令目标被 ${allyToken.actor.name} 魅惑。<br/><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
             let actorPlayer = MidiQOL.playerForActor(actor);
             let chatData = {
@@ -78,7 +78,7 @@ export async function beguilingArrow({ speaker, actor, token, character, item, a
             };
             ChatMessage.create(chatData);
 
-            let contentAlly = `<span style='text-wrap: wrap;'>${actor.name} used Beguiling Arrow and caused their target to be Charmed by you. This effect ends if you attack it, deal damage to it, or force it to make a saving throw.<br/><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let contentAlly = `<span style='text-wrap: wrap;'>${actor.name} 使用了欺诈矢，目标被你所魅惑。但在你攻击它、对它造成伤害、或迫使它进行一次豁免时，此魅惑状态将提前结束。<br/><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
             let actorPlayerAlly = MidiQOL.playerForActor(allyToken.actor);
             let chatDataAlly = {

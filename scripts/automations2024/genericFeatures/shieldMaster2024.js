@@ -16,7 +16,7 @@ export async function shieldMaster2024({ speaker, actor, token, character, item,
         let target = workflow.hitTargets.first();
         let dialogId = "shieldmastershieldbash";
         let dialogTitlePrimary = `${token.actor.name} | ${item.name}`;
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${item.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${item.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let initialTimeLeft = 30;
         let gmUser = game.gps.getPrimaryGM();
@@ -30,7 +30,7 @@ export async function shieldMaster2024({ speaker, actor, token, character, item,
                 <div class="gps-dialog-section">
                 <div class="gps-dialog-content">
                     <p class="gps-dialog-paragraph">
-                    Would you like to use Shield Bash to cause your target to make a saving throw to potentially be Pushed (${pushRangeText}) or to go Prone?
+                    你是否使用你的盾击，使你的对手进行豁免以推离 (${pushRangeText}) 或是被推撞倒地?
                     </p>
 
                     <div>
@@ -142,7 +142,7 @@ export async function shieldMaster2024({ speaker, actor, token, character, item,
         }
 
         let dialogId = "shieldmasterinterposeshield";
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${item.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${item.name}`;
         let dialogTitlePrimary = `${token.actor.name} | ${item.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let result;
@@ -155,7 +155,7 @@ export async function shieldMaster2024({ speaker, actor, token, character, item,
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your reaction to potentially take no damage on a save success with Interpose Shield?</p>
+                                <p class="gps-dialog-paragraph">你是否要用你的介入盾牌反应以在豁免成功时不受伤害?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

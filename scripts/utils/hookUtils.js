@@ -248,20 +248,20 @@ export function daeAddFlags(fieldData) {
 
 export function daeInjectFlags() {
     foundry.utils.setProperty(game.i18n.translations, 'dae.GPS.fieldData.flags.gambits-premades.oaImmunity', {
-        name: "Opportunity Attack Immunity",
-        description: "Prevents token from receiving any Opportunity Attacks"
+        name: "免疫借机攻击",
+        description: "使token不会遭受任何借机攻击"
     });
     foundry.utils.setProperty(game.i18n.translations, 'dae.GPS.fieldData.flags.gambits-premades.oaSuppression', {
-        name: "Opportunity Attack Suppression",
-        description: "Prevents token from making any Opportunity Attacks"
+        name: "压制借机攻击",
+        description: "使token无法做出任何借机攻击"
     });
     foundry.utils.setProperty(game.i18n.translations, 'dae.GPS.fieldData.flags.gambits-premades.oaDisadvantage', {
-        name: "Opportunity Attack Disadvantage",
-        description: "Grants disadvantage on Opportunity Attacks against this token"
+        name: "借机攻击劣势",
+        description: "对此token做出的借机攻击具有劣势"
     });
     foundry.utils.setProperty(game.i18n.translations, 'dae.GPS.fieldData.flags.gambits-premades.oaDisadvantageSource', {
-        name: "Opportunity Attack Source Disadvantage",
-        description: "Disadvantage on Opportunity Attacks against a token"
+        name: "借机攻击来源劣势",
+        description: "此token对一个token做出的借机攻击具有劣势"
     });
     
     DAE.addAutoFields(daeFieldBrowserFields);

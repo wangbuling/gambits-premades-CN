@@ -4,11 +4,11 @@ export async function taleOfHubris({workflowData,workflowType,workflowCombat}) {
     const gpsUuid = "476f9e94-ea67-4413-aade-ea2bab60fcdd";
     if(workflow?.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
     if(!workflow.isCritical) return;
-    let itemName = "Tale of Hubris";
+    let itemName = "盛极必衰";
     let dialogId = gpsUuid;
     let initiatingToken = workflow.token;
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Tale of Hubris Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: initiatingToken, targetedToken: workflow.hitTargets.first(), itemName: itemName, itemType: "feature", itemChecked: ["bardic inspiration"], reactionCheck: true, sightCheck: true, rangeCheck: true, rangeTotal: 60, dispositionCheck: true, dispositionCheckType: "enemy", workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
 
@@ -19,7 +19,7 @@ export async function taleOfHubris({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let dialogContent = `
@@ -28,7 +28,7 @@ export async function taleOfHubris({workflowData,workflowType,workflowCombat}) {
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName} for this nat 20 ${workflowType} roll?</p>
+                                <p class="gps-dialog-paragraph">你是否要对此自然20 ${workflowType} 掷骰使用反应施展 ${itemProperName} ?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                 </div>
@@ -45,7 +45,7 @@ export async function taleOfHubris({workflowData,workflowType,workflowCombat}) {
         `;
 
         let result;
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a roll triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可使用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -74,7 +74,7 @@ export async function taleOfHubris({workflowData,workflowType,workflowCombat}) {
                 await itemData.update({ 'system.uses.spent' : itemData.system.uses.spent + 1 })
             }
 
-            let contentOutcome = `<span style='text-wrap: wrap;'>You use ${itemProperName} to increase the critical threshold on the creature due to its nat 20.<br/><img src="${initiatingToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let contentOutcome = `<span style='text-wrap: wrap;'>由于目标的自然20掷骰，你使用了 ${itemProperName} 降低了目标的受重击阈值。<br/><img src="${initiatingToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
             let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
 
             let chatDataOutcome = {

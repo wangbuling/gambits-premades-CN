@@ -9,7 +9,7 @@ export async function dissonantWhispers({ speaker, actor, token, character, item
             const hasDeafened = target.document.hasStatusEffect("deafened");
             const hasReactionUsed = MidiQOL.hasUsedReaction(target.actor);
             let actorPlayer = MidiQOL.playerForActor(token.actor);
-            let content = `<span style='text-wrap: wrap;'>The target is deafened and automatically suceeds its saving throw.<br><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let content = `<span style='text-wrap: wrap;'>目标耳聋，因此自动成功于豁免。<br><img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
             if (hasDeafened) {
                 let chatData = {
@@ -71,7 +71,7 @@ export async function dissonantWhispers({ speaker, actor, token, character, item
                     let chatData = {
                         user: gmUser,
                         speaker: ChatMessage.getSpeaker({ token: token }),
-                        content: game.i18n.localize(`The target moved ${targetMovementSpeed} feet away from ${token.actor.name}. The target doesn't move into obviously dangerous ground, adjust the movement if this occurs.`)
+                        content: game.i18n.localize(`目标逃离 ${token.actor.name} ${targetMovementSpeed} 之远。目标不会进入明显危险的区域，如果发生了，请手动调整。`)
                     };
                     ChatMessage.create(chatData);
                 }

@@ -3,11 +3,11 @@ export async function mageSlayer2024({workflowData,workflowType,workflowCombat})
     if(!workflow) return;
     const gpsUuid = "b12a3636-0368-4b3c-865e-2302a14908a4";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Mage Slayer";
+    let itemName = "巫师杀手";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
     let browserUser;
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Mage Slayer Timeout`));
 
     if (!["int","wis","cha"].some(stat => workflow.activity.save?.ability?.has(stat))) return;
 
@@ -22,7 +22,7 @@ export async function mageSlayer2024({workflowData,workflowType,workflowCombat})
         const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
         
-        let contentQuestion = `Would you like to use ${itemProperName} to succeed on your saving throw?`;
+        let contentQuestion = `你是否要使用 ${itemProperName} 来使你的豁免成功？`;
 
         let dialogContent = `
             <div class="gps-dialog-container">
@@ -47,7 +47,7 @@ export async function mageSlayer2024({workflowData,workflowType,workflowCombat})
         `;
 
         let result;
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has an option available for a save triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可选择触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -84,7 +84,7 @@ export async function mageSlayer2024({workflowData,workflowType,workflowCombat})
             workflow.saves.add(validTokenPrimary);
             workflow.failedSaves.delete(validTokenPrimary);
 
-            let chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used ${itemProperName} and succeeded their save. <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+            let chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了 ${itemProperName} 并在豁免中成功。 <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
             await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: null});
             return;

@@ -23,7 +23,7 @@ export async function amuletOfTheDevout({ speaker, actor, token, character, item
                 <div class="gps-dialog-content">
                     <div>
                         <div class="gps-dialog-flex">
-                            <p class="gps-dialog-paragraph">Would you like to recover a Channel Divinity charge?</p>
+                            <p class="gps-dialog-paragraph">你想要恢复一次引导神力次数吗?</p>
                             <div id="image-container" class="gps-dialog-image-container">
                                 <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                             </div>

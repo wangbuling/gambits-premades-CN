@@ -8,12 +8,12 @@ export async function thoughtShield({ speaker, actor, token, character, item, ar
             let damageRoll = await new CONFIG.Dice.DamageRoll(`${rollTotal}`, {}, {type: "psychic", properties: ["mgc"]}).evaluate();
 
             const itemData = {
-                name: "Thought Shield - Damage (Psychic)",
+                name: "思维之盾 - 心灵伤害",
                 type: "feat",
                 img: item.img
             }
 
-            new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "psychic", workflow.token ? [workflow.token] : [], damageRoll, {itemData: itemData, flavor: "Thought Shield - Damage (Psychic)"});
+            new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "psychic", workflow.token ? [workflow.token] : [], damageRoll, {itemData: itemData, flavor: "思维之盾 - 心灵伤害"});
         }
     }
 }

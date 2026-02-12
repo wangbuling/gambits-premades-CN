@@ -3,11 +3,11 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
     if(!workflow) return;
     const gpsUuid = "6a8cd8d0-7a6b-42b1-9da7-d9d4aa54a7c1"
     if(workflow?.item?.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Restore Balance";
+    let itemName = "归复平衡";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Restore Balance Timeout`));
 
     if(workflow.legendaryResistanceUsed) return;
 
@@ -25,10 +25,10 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                     workflow.failedSaves.delete(target);
                     workflow.saves.add(target)
 
-                    chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed and were able to save against the effect with a ${saveResult}. <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，并以 ${saveResult} 成功通过检定。 <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed but were still unable to save against the effect with a ${saveResult}. <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，但仍以 ${saveResult} 未能通过检定。 <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent});
             }
@@ -37,10 +37,10 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                     workflow.failedSaves.add(target);
                     workflow.saves.delete(target)
 
-                    chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed and were unable to save against the effect with a ${saveResult}. <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，并以 ${saveResult} 未能通过检定。 <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed but were still able to save against the effect with a ${saveResult}. <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，但仍以 ${saveResult}成功通过检定。 <img src="${target.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent});
             }
@@ -57,7 +57,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
@@ -91,7 +91,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName}? ${targetAllyUuids.length >= 1 && targetEnemyUuids.length === 0 ? 'Choose an ally to remove disadvantage from below.' : targetAllyUuids.length === 0 && targetEnemyUuids.length >= 1 ? 'Choose an enemy to remove advantage from below.' : targetAllyUuids.length >= 1 && targetEnemyUuids.length >= 1 ? 'Choose an ally to remove disadvantage from, or an enemy to remove advantage from below.' : ""}</p>
+                            <p class="gps-dialog-paragraph">你是否要使用反应施展 ${itemProperName}? ${targetAllyUuids.length >= 1 && targetEnemyUuids.length === 0 ? '选择一个盟友移除劣势' : targetAllyUuids.length === 0 && targetEnemyUuids.length >= 1 ? '选择一个敌人移除优势' : targetAllyUuids.length >= 1 && targetEnemyUuids.length >= 1 ? '选择一个盟友移除劣势或选择一个敌人移除优势' : ""}</p>
                             <div class="gps-dialog-flex-wrapper">
                                 <div class="gps-dialog-select-container">
                                     ${targetAllyUuids.length >= 1 ? 
@@ -99,7 +99,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                                             <label for="ally-token" class="gps-dialog-label">Ally:</label>
                                             <select id="ally-token" class="gps-dialog-select"
                                                 ${targetAllyUuids.length >= 1 && targetEnemyUuids.length >= 1 ? 
-                                                    `onchange="resetEnemySelect()"> <option class="gps-dialog-option" value="" selected>Select Ally:</option>` : 
+                                                    `onchange="resetEnemySelect()"> <option class="gps-dialog-option" value="" selected>选择盟友:</option>` : 
                                                     '>'
                                                 }
                                                 ${targetAllyNames.map((name, index) => 
@@ -114,7 +114,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                                             <label for="enemy-token" class="gps-dialog-label">Enemy:</label>
                                             <select id="enemy-token" class="gps-dialog-select"
                                                 ${targetAllyUuids.length >= 1 && targetEnemyUuids.length >= 1 ? 
-                                                    `onchange="resetAllySelect()"> <option class="gps-dialog-option" value="" selected>Select Enemy:</option>` : 
+                                                    `onchange="resetAllySelect()"> <option class="gps-dialog-option" value="" selected>选择敌人:</option>` : 
                                                     '>'
                                                 }
                                                 ${targetEnemyNames.map((name, index) => 
@@ -155,7 +155,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName} ${workflow.token.document.disposition === validTokenPrimary.document.disposition ? 'to remove disadvantage from your Ally?' : workflow.token.document.disposition !== validTokenPrimary.document.disposition ? 'to remove advantage from your Enemy?' : ""}</p>
+                                    <p class="gps-dialog-paragraph">你是否要使用反应施展 ${itemProperName} ${workflow.token.document.disposition === validTokenPrimary.document.disposition ? '移除你盟友的劣势?' : workflow.token.document.disposition !== validTokenPrimary.document.disposition ? '移除你敌人的优势?' : ""}</p>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
             `;
         }
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a save triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
         
@@ -258,24 +258,24 @@ export async function restoreBalance({workflowData,workflowType,workflowCombat})
 
                 if(workflow.token.document.disposition === validTokenPrimary.document.disposition) {
                     if(attackResult >= targetAC) {
-                        if(criticalSuccess) chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed and were able to hit their target with a critical hit. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                        else chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed and were able to hit their target with a ${attackResult}. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        if(criticalSuccess) chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，并成功重击。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        else chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，并成功掷出 ${attackResult} 而命中。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     }
                     else {
-                        if(criticalFailure) chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed but were still unable to hit their target with a critical miss. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                        else chatContent = `<span style='text-wrap: wrap;'>Your ally had their source of disadvantage removed but were still unable to hit their target with a ${attackResult}. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        if(criticalFailure) chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，但仍掷出大失败。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        else chatContent = `<span style='text-wrap: wrap;'>你的盟友被移除了劣势，但仍掷出 ${attackResult} 而未命中。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     }
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: totalRoll});
                     return;
                 }
                 else{
                     if(attackResult < targetAC) {
-                        if(criticalFailure) chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed and were unable to hit their target with a critical miss. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                        else chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed and were unable to hit their target with a ${attackResult}. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        if(criticalFailure) chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，掷出大失败。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        else chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，掷出 ${attackResult} 而未命中。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     }
                     else {
-                        if(criticalSuccess) chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed but were still able to hit their target with a critical hit. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                        else chatContent = `<span style='text-wrap: wrap;'>Your enemy had their source of advantage removed but were still able to hit their target with a ${attackResult}. <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        if(criticalSuccess) chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，但仍掷出重击。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                        else chatContent = `<span style='text-wrap: wrap;'>你的敌人被移除了优势，但仍掷出 ${attackResult} 而命中。 <img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     }
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: totalRoll});
                     return;

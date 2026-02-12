@@ -3,11 +3,11 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "f7c0b8c6-a36a-4f29-8adc-38ada0ac186c";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Sentinel";
+    let itemName = "哨兵";
     let dialogId = gpsUuid;
     let target = workflow.targets.first();
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Sentinel Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: workflow.token, targetedToken: target, itemName: itemName, itemType: null, itemChecked: null, reactionCheck: true, sightCheck: false, rangeCheck: true, rangeTotal: 5, dispositionCheck: true, dispositionCheckType: "enemy", workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
 
@@ -21,7 +21,7 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         // Check valid weapons
@@ -41,7 +41,7 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
         }
 
         // Find 'Unarmed Strike' from the validWeapons array and add to end of list
-        const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "unarmed strike");
+        const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "徒手攻击");
         if (unarmedIndex > -1) {
             if(validWeapons[unarmedIndex]?.uuid !== favoriteWeaponUuid) {
                 let unarmedStrike = validWeapons.splice(unarmedIndex, 1)[0];
@@ -79,7 +79,7 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Would you like to use your reaction to attack using Sentinel? Choose your weapon below.</p>
+                        <p class="gps-dialog-paragraph">你是否要用哨兵反应攻击？从你的以下武器中选择：</p>
                         <div>
                             <div class="gps-dialog-flex">
                                 <label for="item-select_${dialogId}" class="gps-dialog-label">Weapon:</label>
@@ -105,7 +105,7 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
             </div>
         `;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for an attack triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以使用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 

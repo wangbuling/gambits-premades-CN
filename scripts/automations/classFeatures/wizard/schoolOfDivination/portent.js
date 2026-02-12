@@ -6,7 +6,7 @@ export async function portent({ speaker, actor, token, character, item, args, sc
             let parser = new DOMParser();
             let doc = parser.parseFromString(description, 'text/html');
             let portentRollDivs = [];
-            doc.querySelectorAll("[id^='Portent Roll']").forEach(div => {
+            doc.querySelectorAll("[id^='预言骰']").forEach(div => {
                 portentRollDivs.push(div);
             });
             return portentRollDivs;
@@ -44,7 +44,7 @@ export async function portent({ speaker, actor, token, character, item, args, sc
                     const chatMessage = MidiQOL.getCachedChatMessage(workflow.itemCardUuid);
                     let content = foundry.utils.duplicate(chatMessage.content);
                     let searchString = /<div class="midi-qol-attack-roll">[\s\S]*<div class="end-midi-qol-attack-roll">/g;
-                    let replaceString = `<div class="midi-qol-attack-roll"><span style='text-wrap: wrap;'>You used ${divContent.id} and changed the dice result to ${roll}.</span><div class="end-midi-qol-attack-roll">`;
+                    let replaceString = `<div class="midi-qol-attack-roll"><span style='text-wrap: wrap;'>你使用了 ${divContent.id} 并将结果改为 ${roll}.</span><div class="end-midi-qol-attack-roll">`;
                     content = content.replace(searchString, replaceString);
                     await chatMessage.update({ content: content });
                 }
@@ -54,14 +54,14 @@ export async function portent({ speaker, actor, token, character, item, args, sc
         }
 
         await foundry.applications.api.DialogV2.wait({
-            window: { title: 'Portent Roll Selection' },
+            window: { title: '预言骰选择' },
             content: `
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Which portent roll would you like to use?</p>
+                                    <p class="gps-dialog-paragraph">你要使用哪个预言骰?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img src="${item.img}" class="gps-dialog-image">
                                     </div>
@@ -80,14 +80,14 @@ export async function portent({ speaker, actor, token, character, item, args, sc
 
     else if(args?.[0] === "off") {
         let diceNum = actor.classes.wizard.system.levels >= 14 ? 3 : 2;
-        let diceResult = "Your portent rolls are:<br><br>";
+        let diceResult = "你的预言骰结果为:<br><br>";
         
         for (let i = 1; i <= diceNum; i++) {
             let roll = await game.gps.gpsActivityUse({itemUuid: item.uuid, identifier: "syntheticRoll", targetUuid: token.document.uuid});
 
             let result = roll?.utilityRolls?.total;
             
-            diceResult += `<div id="Portent Roll ${i}">- Portent Roll ${i}: <b><span id="portentRoll${i}">${result}</span></b></div>`;
+            diceResult += `<div id="预言骰 ${i}">- 预言骰 ${i}: <b><span id="portentRoll${i}">${result}</span></b></div>`;
         }
 
         diceResult += '<br><div id="endPortentRolls"></div>';

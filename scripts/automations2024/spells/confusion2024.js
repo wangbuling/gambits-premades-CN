@@ -46,12 +46,12 @@ export async function confusion2024({ speaker, actor, token, character, item, ar
             const directionRoll = await new CONFIG.Dice.DamageRoll(`1d4`).evaluate();
             await MidiQOL.displayDSNForRoll(directionRoll, 'damageRoll');
             const directionResult = directionRoll.total;
-            const directions = ["North", "South", "East", "West"];
+            const directions = ["北", "南", "东", "西"];
             directionContent = directions[directionResult - 1];
             const walkSpeedFeet = token.actor.system.attributes.movement.walk;
             await game.gps.socket.executeAsGM("moveTokenByCardinal", {targetUuid: token.document.uuid, distance: walkSpeedFeet, direction: directionContent });
     
-            content1 = `Your movement roll is ${directionResult} and you travel ${directionContent}: You don't take an action this turn.`
+            content1 = `你的随机移动方向结果为 ${directionResult} 并向 ${directionContent} 移动: 你本回合无法执行动作。`
     
             let actorPlayer = MidiQOL.playerForActor(token.actor);
             let chatData = {
@@ -62,13 +62,13 @@ export async function confusion2024({ speaker, actor, token, character, item, ar
             };
             ChatMessage.create(chatData);
         } else if (result < 7) {
-            content = "You can't move or take actions this turn.";
+            content = "你本回合无法移动，也无法执行动作。";
             await updateConfusionEffect(token.actor, true)
         } else if (result < 9) {
             const rangeCheck = MidiQOL.findNearby(null, token, token.actor.system.attributes.movement.walk, { includeToken: false });
             if(rangeCheck.length > 0) {
             const randomSelection = rangeCheck[Math.floor(Math.random() * rangeCheck.length)];
-            content = `You must move to ${randomSelection.actor.name} and attack them with a melee attack.`;
+            content = `你必须移动向 ${randomSelection.actor.name} 并以近战攻击目标。`;
             let target = randomSelection;
             new Sequence()
             .effect()
@@ -100,10 +100,10 @@ export async function confusion2024({ speaker, actor, token, character, item, ar
             .play()
             }
             else {
-            content = `The creature does nothing this turn.`;
+            content = `生物本回合不执行任何动作。`;
             }
         } else {
-            content = "The creature can act and move normally.";
+            content = "该生物自行决定当前回合行为。";
         }
     
         if(content) {
@@ -111,7 +111,7 @@ export async function confusion2024({ speaker, actor, token, character, item, ar
             let chatData = {
                 user: actorPlayer.id,
                 speaker: ChatMessage.getSpeaker({ token: token }),
-                content: game.i18n.localize(`Confusion roll for ${token.actor.name} is ${result}:<br>${content}`)
+                content: game.i18n.localize(`${token.actor.name} 的困惑检定结果为 ${result}:<br>${content}`)
             };
             ChatMessage.create(chatData);
         }

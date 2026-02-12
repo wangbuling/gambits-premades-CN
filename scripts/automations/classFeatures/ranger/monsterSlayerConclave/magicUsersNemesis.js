@@ -7,7 +7,7 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
     const gpsUuid = "e573e3f4-d9f5-4105-8187-d44f09ae6a0b";
     if(workflowType !== "teleport" && workflow?.item?.flags?.["gambits-premades"]?.gpsUuid === gpsUuid) return;
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    let itemName = "Magic-User's Nemesis";
+    let itemName = "魔法使的克星";
     if(workflowType !== "teleport" && !workflow?.activity?.consumption.spellSlot) {
         if(debugEnabled) game.gps.logInfo(`${itemName} failed no activity spell slot consumption (assumed activity is not an initial spell cast)`);
         return;
@@ -27,7 +27,7 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
         if (!hasVSMProperty) return;
     }
 
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Magic-User's Nemesis Timeout`));
     let selectedToken;
     workflowType === "teleport" ? selectedToken = workflowData.token : selectedToken = workflow.token;
     let notInitialCast = false;
@@ -61,7 +61,7 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
             let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
             let itemProperName = chosenItem?.name;
             const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-            const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+            const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
             
             browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
@@ -74,7 +74,7 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName}?</p>
+                                    <p class="gps-dialog-paragraph">你是否要使用反应施展 ${itemProperName}?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                     </div>
@@ -90,7 +90,7 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
                 </div>
             `;
     
-            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a spell triggering ${itemProperName}.</span>`;
+            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 因该法术可以反应触发 ${itemProperName}.</span>`;
             let chatData = { user: gmUser, content: content, roll: false };
             let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
     
@@ -142,10 +142,10 @@ export async function magicUsersNemesis({ workflowData,workflowType,workflowComb
                 if(!saveCheck) continue;
                 
                 if (saveCheck.failedSaves.size !== 0) {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature failed its saving throw and was effected by Magic User's Nemesis.<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标未能通过豁免，被魔法使的克星阻止传送。<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
                 }
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature succeeded its saving throw and was not effected by Magic User's Nemesis.<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>目标通过了豁免，未被魔法使的克星影响。<br><img src="${selectedToken.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     munFailure = true;
                 }
 

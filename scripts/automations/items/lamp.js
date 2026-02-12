@@ -58,7 +58,7 @@ export async function lamp({ speaker, actor, token, item, args, workflow }) {
 
   if (!activeLight) {
     if (!hasRemaining) {
-      ui.notifications.warn(`You do not have any ${animType}s remaining.`);
+      ui.notifications.warn(`你没有 ${animType} 剩下了。`);
       workflow.aborted = true;
       return;
     }

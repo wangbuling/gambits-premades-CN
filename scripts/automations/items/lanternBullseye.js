@@ -58,7 +58,7 @@ export async function lanternBullseye({ speaker, actor, token, item, args, workf
 
   if (!activeLight) {
     if (!hasRemaining) {
-      ui.notifications.warn(`You do not have any ${animType}s remaining.`);
+      ui.notifications.warn(`你没有 ${animType} 剩下了。`);
       workflow.aborted = true;
       return;
     }

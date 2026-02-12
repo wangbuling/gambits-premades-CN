@@ -34,7 +34,7 @@ export async function caltrops({tokenUuid, regionUuid, regionScenario, originX, 
                 <div class="gps-dialog-content">
                     <div>
                         <div class="gps-dialog-flex">
-                            <p class="gps-dialog-paragraph">${token.actor.name} moved through caltrops, are they moving at half speed?</p>
+                            <p class="gps-dialog-paragraph">${token.actor.name} 走过铁蒺藜，他们是以半速前进的吗?</p>
                             <div id="image-container" class="gps-dialog-image-container">
                                 <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                             </div>

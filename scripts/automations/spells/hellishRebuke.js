@@ -12,7 +12,7 @@ export async function hellishRebuke({ speaker, actor, token, character, item, ar
         if(!findValidToken) return;
 
         let dialogId = gpsUuid;
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${item.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${item.name}`;
         let dialogTitlePrimary = `${token.actor.name} | ${item.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let result;
@@ -25,7 +25,7 @@ export async function hellishRebuke({ speaker, actor, token, character, item, ar
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate Hellish Rebuke on the creature who damaged you?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用反应对伤害你的生物施展炼狱叱喝?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>

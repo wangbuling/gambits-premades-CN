@@ -10,7 +10,7 @@ export async function firesBurn2024({ speaker, actor, token, character, item, ar
         if(itemUsesRemaining === 0) return;
 
         let dialogId = "e4bed97c-3e72-4f3a-b3f6-916d5e87d0de";
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${itemName}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${itemName}`;
         let dialogTitlePrimary = `${token.actor.name} | ${itemName}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let result;
@@ -23,7 +23,7 @@ export async function firesBurn2024({ speaker, actor, token, character, item, ar
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to deal additional damage using ${itemName}?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用 ${itemName} 造成额外伤害?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${macroItem.img}" class="gps-dialog-image">
                                 </div>

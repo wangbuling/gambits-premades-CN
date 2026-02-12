@@ -3,13 +3,13 @@ import { showDialog } from "./dialogUtils.js";
 
 const ACTION_DEFINITIONS = {
   "light": {
-    label: "Light",
+    label: "点亮",
     callback: async ({ token, item, effectName, filePath, lightEffect, animType, gpsUuid, gpsUuidDim }) => {
       await light({ token, item, effectName, filePath, lightEffect, animType, gpsUuid, gpsUuidDim });
     }
   },
   "throw": {
-    label: "Throw",
+    label: "投掷",
     callback: async ({ token, actor, item, filePath, filePathDim, lightEffect, lightEffectDim, effectName, animType, gpsUuid, gpsUuidDim }) => {
       await lightThrow({ token, actor, item, filePath, filePathDim, lightEffect, lightEffectDim, effectName, animType, gpsUuid, gpsUuidDim });
 
@@ -19,13 +19,13 @@ const ACTION_DEFINITIONS = {
     }
   },
   "extinguish": {
-    label: "Extinguish",
+    label: "熄灭",
     callback: async ({ token, effectName, gpsUuid, gpsUuidDim }) => {
       await lightExtinguish({ token, effectName, gpsUuid, gpsUuidDim });
     }
   },
   "dim": {
-    label: "Dim",
+    label: "变暗",
     callback: async ({ token, item, effectName, filePathDim, lightEffectDim, animType, gpsUuid, gpsUuidDim }) => {
       await light({ token, item, effectName, filePathDim, lightEffect: lightEffectDim, animType, gpsUuid, gpsUuidDim });
     }
@@ -55,7 +55,7 @@ function buildDialogButtons(actionsToUse, context) {
 
 export async function showLightDialog({ actions, token, item, effectName, filePath, lightEffect, animType, gpsUuid, actor, filePathDim, lightEffectDim, gpsUuidDim = null }) {
   const dialogTitle = item?.name ?? "Light";
-  const dialogMessage = `What would you like to do with your ${dialogTitle}?`;
+  const dialogMessage = `你想用你的 ${dialogTitle} 做什么?`;
 
   const buttons = buildDialogButtons(actions, { token, actor, item, effectName, filePath, lightEffect, animType, gpsUuid, filePathDim, lightEffectDim, gpsUuidDim });
 

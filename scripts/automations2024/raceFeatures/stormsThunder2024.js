@@ -27,7 +27,7 @@ export async function stormsThunder2024({ speaker, actor, token, character, item
         }
 
         let dialogId = "0110149a-6f47-4a69-8e5e-34b33da48ec0";
-        let dialogTitleGM = `Waiting for ${token.actor.name}'s selection | ${macroItem.name}`;
+        let dialogTitleGM = `等待 ${token.actor.name} 选择 | ${macroItem.name}`;
         let dialogTitlePrimary = `${token.actor.name} | ${macroItem.name}`;
         let browserUser = game.gps.getBrowserUser({ actorUuid: actor.uuid });
         let result;
@@ -40,7 +40,7 @@ export async function stormsThunder2024({ speaker, actor, token, character, item
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use your reaction to deal damage to the creature that damaged you using ${itemName}?</p>
+                                <p class="gps-dialog-paragraph">你是否要使用 ${itemName} 反应对伤害你的目标造成伤害?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${macroItem.img}" class="gps-dialog-image">
                                 </div>

@@ -11,7 +11,7 @@ export async function starMap({ item }) {
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use Circle of Stars to initiate a free use of ${item.name}? It will be cast at its base level. You have ${freeUses} uses remaining.</p>
+                                <p class="gps-dialog-paragraph">你是否要使用星图来免费施展一次 ${item.name}? 它将以基础法术环级施展。你还有 ${freeUses} 次剩余。</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img src="${item.img}" class="gps-dialog-image">
                                 </div>
@@ -23,16 +23,16 @@ export async function starMap({ item }) {
         `,
         buttons: [{
             action: "Yes",
-            label: "Yes",
+            label: "是",
             callback: async (event, button, dialog) => {
                 await item.update({ "system.uses.spent": item.system.uses.spent + 1 });
-                ui.notifications.info(`You used Circle of Stars to initiate ${item.name} and did not use a spell slot`);
+                ui.notifications.info(`你使用了星图来施展 ${item.name} ，没有消耗法术环位。`);
                 return true;
             }
         },
         {
             action: "No",
-            label: "No",
+            label: "否",
             callback: async () => {return false;}
         }],
         close: async (event, dialog) => {

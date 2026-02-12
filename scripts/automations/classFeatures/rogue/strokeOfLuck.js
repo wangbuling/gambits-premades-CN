@@ -15,7 +15,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">You've missed your attack, would you like to use Stroke of Luck to succeed instead?</p>
+                                <p class="gps-dialog-paragraph">你的攻击失败了，你要使用幸运一击改为命中吗?</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>
@@ -31,7 +31,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
             </div>
         `;
         
-        let content = `<span style='text-wrap: wrap;'><img src="${token.actor.img}" style="width: 25px; height: auto;" /> ${token.actor.name} has a reaction available for a save triggering ${macroItem.name}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${token.actor.img}" style="width: 25px; height: auto;" /> ${token.actor.name} 可以用反应触发 ${macroItem.name}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -90,7 +90,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
                     <div class="gps-dialog-content">
                         <div>
                             <div class="gps-dialog-flex">
-                                <p class="gps-dialog-paragraph">Would you like to use Stroke of Luck to change your ability check roll to a 20?</p>
+                                <p class="gps-dialog-paragraph">你想要使用幸运一击将你的属性检定改为20吗？</p>
                                 <div id="image-container" class="gps-dialog-image-container">
                                     <img id="img_${dialogId}" src="${item.img}" class="gps-dialog-image">
                                 </div>
@@ -106,7 +106,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
             </div>
         `;
 
-        let content = `<span style='text-wrap: wrap;'><img src="${token.actor.img}" style="width: 25px; height: auto;" /> ${token.actor.name} has a reaction available for a save triggering ${macroItem.name}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${token.actor.img}" style="width: 25px; height: auto;" /> ${token.actor.name} 可以用反应触发 ${macroItem.name}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -133,7 +133,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
                 let abilityType = chatMessage?.flags?.dnd5e.roll.abilityId;
                 let abilityScore = actor.system.abilities[abilityType].mod;
                 const newTotal = abilityScore + 20;
-                let content = `You used Stroke of Luck to change your ability check to a ${newTotal}`
+                let content = `你使用幸运一击将结果改为 ${newTotal}`
 
                 let actorPlayer = MidiQOL.playerForActor(actor);
                 let chatData = {
@@ -152,7 +152,7 @@ export async function strokeOfLuck({ speaker, actor, token, character, item, arg
                 let abilityType = chatMessage?.flags?.dnd5e.roll.skillId;
                 let abilityScore = actor.system.skills[abilityType].mod;
                 const newTotal = abilityScore + 20;
-                let content = `You used Stroke of Luck to change your skill check to a ${newTotal}`
+                let content = `你使用幸运一击将结果改为 ${newTotal}`
 
                 let actorPlayer = MidiQOL.playerForActor(actor);
                 let chatData = {

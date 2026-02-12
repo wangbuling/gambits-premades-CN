@@ -40,7 +40,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                     <div class="gps-dialog-content">
-                        <p class="gps-dialog-paragraph">Would you like to use your action to make an athletics ability check to escape Black Tentacles?</p>
+                        <p class="gps-dialog-paragraph">你是否要使用你的动作进行一次运动检定以逃脱黑触手?</p>
                     </div>
                 </div>
                 <div class="gps-dialog-button-container">
@@ -68,7 +68,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                 let chatData = {
                 user: browserUser.id,
                 speaker: ChatMessage.getSpeaker({ token: token }),
-                content: `You successfully escape from Black Tentacles!`
+                content: `你成功地逃出了黑触手!`
                 };
                 ChatMessage.create(chatData);
             }
@@ -76,7 +76,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                 let chatData = {
                 user: browserUser.id,
                 speaker: ChatMessage.getSpeaker({ token: token }),
-                content: `You are unable to escape Black Tentacles this turn.`
+                content: `本回合你无法逃出黑触手。`
                 };
                 ChatMessage.create(chatData);
             }
@@ -102,7 +102,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your action to make an athletics ability check to escape Black Tentacles?</p>
+                            <p class="gps-dialog-paragraph">你是否要使用你的动作进行一次运动检定以逃脱黑触手??</p>
                         </div>
                     </div>
                     <div class="gps-dialog-button-container">
@@ -133,7 +133,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                     let chatData = {
                     user: browserUser.id,
                     speaker: ChatMessage.getSpeaker({ token: token }),
-                    content: `<span style='text-wrap: wrap;'>You successfully escape from Black Tentacles!</span>`
+                    content: `<span style='text-wrap: wrap;'>你成功地逃出了黑触手!</span>`
                     };
                     ChatMessage.create(chatData);
                     await resumeMovement();
@@ -142,7 +142,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                     let chatData = {
                     user: browserUser.id,
                     speaker: ChatMessage.getSpeaker({ token: token }),
-                    content: `<span style='text-wrap: wrap;'>You are unable to escape Black Tentacles this turn.</span>`
+                    content: `<span style='text-wrap: wrap;'>本回合你无法逃出黑触手。</span>`
                     };
                     ChatMessage.create(chatData);
 

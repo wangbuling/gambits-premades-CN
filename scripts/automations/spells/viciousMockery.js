@@ -98,7 +98,7 @@ export async function viciousMockery({ speaker, actor, token, character, item, a
                     <div class="gps-dialog-container">
                         <div class="gps-dialog-section">
                             <div class="gps-dialog-content">
-                                <p class="gps-dialog-paragraph">What do you say?</p>
+                                <p class="gps-dialog-paragraph">你想说什么?</p>
                                 <div>
                                     <div class="gps-dialog-flex">
                                         <select id="wordSelect" class="gps-dialog-select" style="background-color: rgba(181, 99, 69, 0.2);">
@@ -121,7 +121,7 @@ export async function viciousMockery({ speaker, actor, token, character, item, a
                             <div class="gps-dialog-content">
                                 <div>
                                     <div class="gps-dialog-flex">
-                                        <p class="gps-dialog-paragraph">What do you say?</p>
+                                        <p class="gps-dialog-paragraph">你想说什么?</p>
                                         <div style='width: 100%; text-align: center;'>
                                             <input type="text" name="wordInput" id="wordInput" maxlength = "50" autofocus>
                                         </div>
@@ -137,11 +137,11 @@ export async function viciousMockery({ speaker, actor, token, character, item, a
             }
 
             await foundry.applications.api.DialogV2.wait({
-                window: { title: '🗣Vicious Mockery😜️' },
+                window: { title: '🗣恶言相加😜️' },
                 content: content,
                 buttons: [{
                     action: "Cast",
-                    label: "Cast",
+                    label: "施展",
                     default: true,
                     callback: async (event, button, dialog) => {
                         let wordInput = document.querySelector('#wordInput');

@@ -3,12 +3,12 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "b352241e-5042-44a4-b632-3168ded51946";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Cutting Words";
+    let itemName = "语出惊人";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
     let homebrewDisableMaxMiss = MidiQOL.safeGetGameSetting('gambits-premades', 'disableCuttingWordsMaxMiss');
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Cutting Words Timeout`));
 
     if(workflowType === "damage" && workflow.hitTargets?.size === 0) return;
 
@@ -61,7 +61,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
             default: hue = 0;
         }
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
         let dialogContent;
@@ -79,7 +79,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your reaction to initiate ${itemProperName} for this ${workflowType} roll?</p>
+                            <p class="gps-dialog-paragraph">你是否要对此次 ${workflowType} 掷骰使用反应施展 ${itemProperName}  ?</p>
                             <div>
                                 <div class="gps-dialog-flex">
                                     <label for="damage-list" class="gps-dialog-label">Damage:</label>
@@ -120,7 +120,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
                         <div class="gps-dialog-content">
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <p class="gps-dialog-paragraph">${["none", "detailsDSN", "details"].includes(rollDetailSetting) ? `The target rolled a ${workflow.attackTotal} to attack. ` : ""}Would you like to use your reaction to use ${itemProperName} for this ${workflowType} roll?</p>
+                                    <p class="gps-dialog-paragraph">${["none", "detailsDSN", "details"].includes(rollDetailSetting) ? `目标掷出了 ${workflow.attackTotal} 攻击检定。 ` : ""}你是否要对此次 ${workflowType} 掷骰使用反应施展 ${itemProperName} ?</p>
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
                                     </div>
@@ -137,7 +137,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
             `;
         }
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a ${workflowType} triggering ${itemProperName}.</span>`;
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可使用反应施展 ${itemProperName} 影响 ${workflowType} 掷骰。</span>`;
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -180,7 +180,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
             let charmImmunity = workflow.actor.system.traits.ci.value.has("charmed");
             
             if (charmImmunity || hasDeafened) {
-                chatContent = `<span style='text-wrap: wrap;'>The creature seems to not be effected by your ${itemProperName}.<img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                chatContent = `<span style='text-wrap: wrap;'>目标似乎无法被你的 ${itemProperName} 影响。<img src="${workflow.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                 let actorPlayer = MidiQOL.playerForActor(validTokenPrimary.actor);
                 let chatData = {
@@ -255,7 +255,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
         
                 workflow.workflowOptions.noOnUseMacro = saveSetting;
 
-                chatContent = `<span style='text-wrap: wrap;'>The creature takes a cutting word, and their damage is reduced by ${reroll.total}. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                chatContent = `<span style='text-wrap: wrap;'>生物遭受惊人之语，伤害被降低了 ${reroll.total}。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll});
 
@@ -276,7 +276,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
                 workflow.workflowOptions.noOnUseMacro = saveSetting;
 
                 if((workflow.attackTotal - reroll.total) < targetAC) {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature takes a cutting word reducing their attack by ${reroll.total}, and were unable to hit their target. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物遭受惊人之语，攻击检定降低了 ${reroll.total}, 并无法击中目标。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: rerollNew});
 
@@ -284,7 +284,7 @@ export async function cuttingWords({workflowData,workflowType,workflowCombat}) {
                 }
 
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature takes a cutting word reducing their attack by ${reroll.total}, but were still able to hit their target. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物遭受惊人之语，攻击检定降低了 ${reroll.total}, 但仍然击中了目标。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: rerollNew});
 

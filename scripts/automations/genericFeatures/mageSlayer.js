@@ -3,10 +3,10 @@ export async function mageSlayer({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "fc0e0473-038b-4e68-abd5-538b8fbbb4a5";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Mage Slayer";
+    let itemName = "巫师杀手";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Mage Slayer Timeout`));
 
     let findValidTokens = game.gps.findValidTokens({initiatingToken: workflow.token, targetedToken: workflow.token, itemName: itemName, itemType: null, itemChecked: null, reactionCheck: true, sightCheck: false, rangeCheck: true, rangeTotal: 5, dispositionCheck: true, dispositionCheckType: "enemy", workflowType: workflowType, workflowCombat: workflowCombat, gpsUuid: gpsUuid});
 
@@ -48,7 +48,7 @@ export async function mageSlayer({workflowData,workflowType,workflowCombat}) {
         }
         else {
             const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-            const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+            const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
             let browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
             // Check valid weapons
@@ -68,7 +68,7 @@ export async function mageSlayer({workflowData,workflowType,workflowCombat}) {
             }
 
             // Find 'Unarmed Strike' from the validWeapons array and add to end of list
-            const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "unarmed strike");
+            const unarmedIndex = validWeapons.findIndex(item => item.name.toLowerCase() === "徒手攻击");
             if (unarmedIndex > -1) {
                 if(validWeapons[unarmedIndex]?.uuid !== favoriteWeaponUuid) {
                     let unarmedStrike = validWeapons.splice(unarmedIndex, 1)[0];
@@ -106,7 +106,7 @@ export async function mageSlayer({workflowData,workflowType,workflowCombat}) {
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your reaction to attack using Mage Slayer? Choose your weapon below.</p>
+                            <p class="gps-dialog-paragraph">你是否要使用巫师杀手反应攻击？从你以下武器中选择：</p>
                             <div>
                                 <div class="gps-dialog-flex">
                                     <label for="item-select_${dialogId}" class="gps-dialog-label">Weapon:</label>
@@ -132,7 +132,7 @@ export async function mageSlayer({workflowData,workflowType,workflowCombat}) {
                 </div>
             `;
 
-            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for an attack triggering ${itemProperName}.</span>`
+            let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以使用反应触发 ${itemProperName}.</span>`
             let chatData = { user: gmUser, content: content, roll: false };
             let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 

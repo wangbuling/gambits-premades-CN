@@ -15,7 +15,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
             await MidiQOL.displayDSNForRoll(damageRoll, 'damageRoll');
 
             const itemDataDamage = {
-                name: "Cloud of Daggers - Damage (Slashing)",
+                name: "匕首之云 - 挥砍伤害",
                 type: "feat",
                 img: item.img
             }
@@ -32,12 +32,12 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
         }
 
         let itemData = [{
-            "name": `${item.name} - Move`,
+            "name": `${item.name} - 移动`,
             "type": "feat",
             "img": item.img,
             "system": {
                 "description": {
-                    "value": "<p>You can move your cloud of daggers up to 30 feet as a Magic action.</p>",
+                    "value": "<p>你可以将你的匕首之云以一个魔法动作移动30尺。</p>",
                     "chat": "",
                     "unidentified": ""
                 },
@@ -76,7 +76,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
                             "automationOnly": false,
                             "otherActivityCompatible": true,
                         },
-                        "name": "Cloud of Daggers - Move"
+                        "name": "匕首之云 - 移动"
                     }
                 }
             },
@@ -90,7 +90,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
                 },
                 "dae": {
                 "macro": {
-                    "name": `${item.name} - Move`,
+                    "name": `${item.name} - 移动`,
                     "img": item.img,
                     "type": "script",
                     "scope": "global",
@@ -123,7 +123,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
 
         let itemCheck = actor.items.some(i => i.flags["gambits-premades"]?.gpsUuid === "920bfa86-2a3a-4e6a-ae7d-3d420c2c5992");
         if (!itemCheck) await actor.createEmbeddedDocuments("Item", itemData);
-        ui.notifications.info(`Feature item "${item.name} - Move" created. Use this item to move your ${item.name} when needed.`)
+        ui.notifications.info(`Feature item "${item.name} - 移动" 已创建. 使用 ${item.name} 以在需要时移动。`)
         return;
     }
 
@@ -143,7 +143,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
     }
 
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    let itemName = "Cloud of Daggers";
+    let itemName = "匕首之云";
     let gmUser = game.gps.getPrimaryGM();
 
     if(!regionUuid || !regionScenario || !tokenUuid) {
@@ -189,12 +189,12 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
     await MidiQOL.displayDSNForRoll(damageRoll, 'damageRoll');
 
     const itemData = {
-        name: "Cloud of Daggers - Damage (Slashing)",
+        name: "匕首之云 - 挥砍伤害",
         type: "feat",
         img: chosenItem.img
     }
 
-    await new MidiQOL.DamageOnlyWorkflow(effectOriginActor, effectOriginToken, damageRoll.total, "slashing", token ? [token] : [], damageRoll, {itemData: itemData, flavor: "Cloud of Daggers - Damage (Slashing)"});
+    await new MidiQOL.DamageOnlyWorkflow(effectOriginActor, effectOriginToken, damageRoll.total, "slashing", token ? [token] : [], damageRoll, {itemData: itemData, flavor: "匕首之云 - 挥砍伤害"});
     if(regionScenario === "tokenEnter" && movementScenario) await resumeMovement();
 
     return;

@@ -3,11 +3,11 @@ export async function indomitable({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "75e0633f-3973-4ea7-9246-da3e6d0da457";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Indomitable";
+    let itemName = "不屈";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Indomitable Timeout`));
 
     // Check if there is a save success
     if(workflowType === "save" && workflow.failedSaves.size === 0) return debugEnabled ? game.gps.logInfo(`${itemName} failed due to no valid failed save targets`) : "";
@@ -22,13 +22,13 @@ export async function indomitable({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemProperName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemProperName}`;
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
         
         let indomitableHomebrew = MidiQOL.safeGetGameSetting('gambits-premades', 'enableAutoSucceedIndomitable');
         let contentQuestion;
-        if(indomitableHomebrew) contentQuestion = `Would you like to use ${itemProperName} to succeed on your saving throw?`;
-        else contentQuestion = `Would you like to use ${itemProperName} to re-roll your saving throw?`;
+        if(indomitableHomebrew) contentQuestion = `你是否要使用 ${itemProperName} 将豁免改为成功?`;
+        else contentQuestion = `你是否要使用 ${itemProperName} 重掷豁免?`;
 
         let dialogContent = `
             <div class="gps-dialog-container">
@@ -53,7 +53,7 @@ export async function indomitable({workflowData,workflowType,workflowCombat}) {
         `;
 
         let result;
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has an option available for a save triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以选择对此豁免触发 ${itemProperName}。</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -103,15 +103,15 @@ export async function indomitable({workflowData,workflowType,workflowCombat}) {
                 workflow.saves.add(validTokenPrimary);
                 workflow.failedSaves.delete(validTokenPrimary);
 
-                if(indomitableHomebrew) chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used indomitable and auto-succeeded their save. <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
-                else chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used indomitable and succeeded their save. <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                if(indomitableHomebrew) chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了不屈并自动成功于豁免。 <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                else chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了不屈并成功于豁免。 <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: !indomitableHomebrew ? reroll.saveRolls : null});
                 return;
             }
 
             else {
-                chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used indomitable but still failed their save. <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了不屈，但仍然失败于豁免。 <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll.saveRolls});
                 return;

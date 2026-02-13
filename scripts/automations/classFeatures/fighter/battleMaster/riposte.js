@@ -190,7 +190,7 @@ export async function riposte({workflowData,workflowType,workflowCombat}) {
                 configureDialog: false,
                 targetUuids: [`${workflow.token.document.uuid}`],
                 workflowOptions: {
-                    autoRollDamage: 'always',
+                    autoRollDamage: 'onHit',
                     autoRollAttack: true,
                     autoFastDamage: true
                 }

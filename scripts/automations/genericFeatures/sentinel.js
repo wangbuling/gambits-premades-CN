@@ -167,7 +167,7 @@ export async function sentinel({workflowData,workflowType,workflowCombat}) {
                 configureDialog: false,
                 targetUuids: [`${workflow.token.document.uuid}`],
                 workflowOptions: {
-                    autoRollDamage: 'always',
+                    autoRollDamage: 'onHit',
                     autoRollAttack: true,
                     autoFastDamage: true
                 }

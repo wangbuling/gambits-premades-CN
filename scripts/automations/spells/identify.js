@@ -6,11 +6,11 @@ export async function identify({ speaker, actor, token, character, item, args, s
     if (items.length === 0) return ui.notifications.warn("You have no unidentified items");
 
     await foundry.applications.api.DialogV2.wait({
-        window: { title: "Identify Cast Type" },
-        content: `<p>Would you like to cast Identify ritually?</p>`,
+        window: { title: "鉴定术施展方式" },
+        content: `<p>你是否要以仪式施展鉴定术？</p>`,
         buttons: [{
             action: "Yes",
-            label: "Yes",
+            label: "是",
             callback: async () => {
                 workflow.aborted = true;
                 listUnidentifiedItems(true);
@@ -18,7 +18,7 @@ export async function identify({ speaker, actor, token, character, item, args, s
         },
         {
             action: "No",
-            label: "No",
+            label: "否",
             default: true,
             callback: async () => {
                 const spells = actor.system.spells;
@@ -50,11 +50,11 @@ export async function identify({ speaker, actor, token, character, item, args, s
                 else if(checkType === "ritual") {
                     workflow.aborted = true;
                     listUnidentifiedItems(true);
-                    return ui.notifications.info("Casting Ritually: You are only able to cast Identify ritually")
+                    return ui.notifications.info("你只能以仪式施展鉴定术")
                 }
 
                 if (!hasSpellSlots) {
-                    return ui.notifications.warn("You have no spell slots available");
+                    return ui.notifications.warn("你没有可用的法术位");
                 }
                 else {
                     workflow.aborted = true;
@@ -74,7 +74,7 @@ export async function identify({ speaker, actor, token, character, item, args, s
                 let spellSlot = actor.system.spells[`spell${level}`].value;
                 if (spellSlot > 0) {
                     let levelWithOrdinal = getOrdinalNumber(level);
-                    dropdownOptions += `<option class="gps-dialog-option" value="${level}">${levelWithOrdinal} Level (${spellSlot})</option>`;
+                    dropdownOptions += `<option class="gps-dialog-option" value="${level}">${levelWithOrdinal} 等级 (${spellSlot})</option>`;
                 }
             }
         }
@@ -191,7 +191,7 @@ export async function identify({ speaker, actor, token, character, item, args, s
             let spellSlot = actor.system.spells[`spell${level}`]?.value;
             if (spellSlot > 0) {
                 let levelWithOrdinal = getOrdinalNumber(level);
-                dropdownOptions += `<option class="gps-dialog-option" value="${level}">${levelWithOrdinal} Level (${spellSlot})</option>`;
+                dropdownOptions += `<option class="gps-dialog-option" value="${level}">${levelWithOrdinal} 等级 (${spellSlot})</option>`;
             }
         }
 

@@ -275,7 +275,7 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
                 configureDialog: false,
                 targetUuids: [token.uuid],
                 workflowOptions: {
-                    autoRollDamage: 'always',
+                    autoRollDamage: 'onHit',
                     autoRollAttack: true,
                     autoFastDamage: true
                 }
@@ -313,7 +313,7 @@ export async function opportunityAttackScenarios({tokenUuid, regionUuid, regionS
             configureDialog: hasWarCaster,
             targetUuids: [token.uuid],
             workflowOptions: {
-                autoRollDamage: 'always',
+                autoRollDamage: 'onHit',
                 autoRollAttack: true,
                 autoFastDamage: true
             }

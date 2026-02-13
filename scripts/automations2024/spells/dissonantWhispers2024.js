@@ -44,7 +44,7 @@ export async function dissonantWhispers2024({ speaker, actor, token, character, 
                 let chatData = {
                     user: gmUser,
                     speaker: ChatMessage.getSpeaker({ token: token }),
-                    content: game.i18n.localize(`目标逃离了${token.actor.name} ${targetMovementSpeed}  之远。目标并不会移动到明显危险的地方，如果发生，手动调整移动。`)
+                    content: game.i18n.localize(`目标逃离了${token.actor.name} ${targetMovementSpeed}  尺之远。目标并不会移动到明显危险的地方，如果发生，手动调整移动。`)
                 };
                 ChatMessage.create(chatData);
             }

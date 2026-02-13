@@ -8,15 +8,15 @@ export async function command2024({ speaker, actor, token, character, item, args
             <div class="gps-dialog-container">
                 <div class="gps-dialog-section">
                 <div class="gps-dialog-content">
-                    <p class="gps-dialog-paragraph">你要如何命令?</p>
+                    <p class="gps-dialog-paragraph">你要如何命令目标?</p>
                     <div>
                     <div class="gps-dialog-flex">
                         <select class="gps-dialog-select" name="commandSelect" id="commandSelect" autofocus>
-                            <option value="过来">Approach</option>
-                            <option value="放下">Drop</option>
-                            <option value="走开">Flee</option>
-                            <option value="趴下">Grovel</option>
-                            <option value="立定">Halt</option>
+                            <option value="过来">过来</option>
+                            <option value="放下">放下</option>
+                            <option value="走开">走开</option>
+                            <option value="趴下">趴下</option>
+                            <option value="立定">立定</option>
                         </select>
                         <div id="image-container" class="gps-dialog-image-container">
                         <img src="${workflow.item.img}" class="gps-dialog-image">

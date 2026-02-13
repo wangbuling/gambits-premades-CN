@@ -57,6 +57,7 @@ export async function recklessAttack2024({ speaker, actor, token, character, ite
         }
         else if (userDecision) {
             workflow.advantage = true;
+            workflow.attackAdvAttribution.add("Reckless Attack");
             await actor.setFlag("midi-qol", "checkRecklessAttack2024", true);
 
             let effectData = [{

@@ -53,7 +53,7 @@ export async function indomitable2024({workflowData,workflowType,workflowCombat}
         `;
 
         let result;
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has an option available for a save triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
 
@@ -140,7 +140,7 @@ export async function indomitable2024({workflowData,workflowType,workflowCombat}
             }
 
             else {
-                chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} used indomitable but still failed their save. <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                chatContent = `<span style='text-wrap: wrap;'>${validTokenPrimary.actor.name} 使用了不屈，但仍在豁免中失败。 <img src="${validTokenPrimary.actor.img}" width="30" height="30" style="border:0px"></span>`;
 
                 await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll.saveRolls});
                 return;

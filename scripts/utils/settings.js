@@ -946,7 +946,7 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
           {
             id: "disableCuttingWordsMaxMiss",
             name: "禁用语出惊人最大失误时触发",
-            description: "当最大吟游骰子也无法影响命中时跳过提示。",
+            description: "当最大诗人激励骰也无法影响命中时跳过提示。",
             boolKey: "disableCuttingWordsMaxMiss"
           }
         ]
@@ -1005,7 +1005,7 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
       {
         id: "magicUsersNemesis",
         name: "魔法使的克星",
-        description: "为怪物杀手游侠的魔法使的克星提供对话框。",
+        description: "为怪物杀手游侠的“魔法使的克星”提供对话框。",
         boolKey: "enableMagicUsersNemesis",
         timeoutKey: "Magic-User's Nemesis Timeout"
       },
@@ -1019,14 +1019,14 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
       {
         id: "rainOfCinders",
         name: "灰烬之雨",
-        description: "为沸炉巫团女巫的灰烬之雨提供对话框。",
+        description: "为沸炉巫团女巫的“灰烬之雨”提供对话框。",
         boolKey: "enableRainOfCinders",
         timeoutKey: "Rain of Cinders Timeout"
       },
       {
         id: "restoreBalance",
         name: "归复平衡",
-        description: "为时械术士的归复平衡特性提供对话框",
+        description: "为时械术士的“归复平衡”特性提供对话框",
         boolKey: "enableRestoreBalance",
         timeoutKey: "Restore Balance Timeout"
       },
@@ -1047,7 +1047,7 @@ export class ClassFeaturesSettingsMenu extends BaseSettingsMenu {
       {
         id: "witchesHex",
         name: "女巫诅咒",
-        description: "为女巫的女巫诅咒提供对话框。",
+        description: "为女巫的“女巫诅咒”提供对话框。",
         boolKey: "Enable Witches Hex",
         timeoutKey: "Witches Hex Timeout"
       }
@@ -1149,7 +1149,7 @@ export class SpellSettingsMenu extends BaseSettingsMenu {
         description: "向拥有“法术反制”法术的玩家呈现对话框。",
         boolKey: "Enable Counterspell",
         timeoutKey: "Counterspell Timeout",
-        children: [ { id: "counterspellSpellPenetration", name: "Spell Penetration", description: "Enable optional Bloodied & Bruised feature Spell Penetration.", boolKey: "enableCounterspellSpellPenetration" } ]
+        children: [ { id: "counterspellSpellPenetration", name: "法术穿透", description: "启用Bloodied & Bruised法术穿透可选项。", boolKey: "enableCounterspellSpellPenetration" } ]
       },
       {
         id: "silveryBarbs",
@@ -1162,7 +1162,7 @@ export class SpellSettingsMenu extends BaseSettingsMenu {
           { id: "enableSilveryBarbsOnNat20", name: "重击时启用", description: "仅在攻击掷骰重击时启用", boolKey: "enableSilveryBarbsOnNat20" }
         ]
       },
-      { id: "powerWordRebound", name: "Power Word Rebound", description: "Presents a dialog to players with Power Word Rebound.", boolKey: "Enable Power Word Rebound", timeoutKey: "Power Word Rebound Timeout" },
+      { id: "powerWordRebound", name: "律令反弹", description: "向拥有“律令反弹”法术的玩家呈现对话框。", boolKey: "Enable Power Word Rebound", timeoutKey: "Power Word Rebound Timeout" },
       { id: "temporalShunt", name: "时流刹转", description: "向拥有“时流刹转”法术的玩家呈现对话框。", boolKey: "enableTemporalShunt", timeoutKey: "Temporal Shunt Timeout" }
     ];
 

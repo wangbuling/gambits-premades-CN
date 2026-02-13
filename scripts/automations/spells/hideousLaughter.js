@@ -192,7 +192,7 @@ export async function hideousLaughter({ speaker, actor, token, character, item, 
 
                 .play()
             }
-            else if (intScore <= 4) {
+            else if (intScore <= 1) {
                 ui.notifications.warn("This creature is not effected, its Intelligence score is too low.");
                 workflow.failedSaves.delete(target);
             }

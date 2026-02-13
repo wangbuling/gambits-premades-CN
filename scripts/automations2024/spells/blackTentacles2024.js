@@ -102,7 +102,7 @@ export async function blackTentacles2024({speaker, actor, character, item, args,
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">你是否要使用你的动作进行一次运动检定以逃脱黑触手??</p>
+                            <p class="gps-dialog-paragraph">你是否要使用你的动作进行一次运动检定以逃脱黑触手?</p>
                         </div>
                     </div>
                     <div class="gps-dialog-button-container">

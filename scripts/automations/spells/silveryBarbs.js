@@ -3,13 +3,13 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
     if(!workflow) return;
     const gpsUuid = "548b5cab-f870-47b6-828a-8de7549debeb";
     if(workflow.item.flags["gambits-premades"]?.gpsUuid === gpsUuid) return;
-    let itemName = "Silvery Barbs";
+    let itemName = "银光锐语";
     let dialogId = gpsUuid;
     let gmUser = game.gps.getPrimaryGM();
     let debugEnabled = MidiQOL.safeGetGameSetting('gambits-premades', 'debugEnabled');
     let homebrewDisableNat20 = MidiQOL.safeGetGameSetting('gambits-premades', 'disableSilveryBarbsOnNat20');
     let homebrewEnableNat20 = MidiQOL.safeGetGameSetting('gambits-premades', 'enableSilveryBarbsOnNat20');
-    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `${itemName} Timeout`));
+    const initialTimeLeft = Number(MidiQOL.safeGetGameSetting('gambits-premades', `Silvery Barbs Timeout`));
 
     if(workflow.legendaryResistanceUsed) return;
 
@@ -33,7 +33,7 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
         let chosenItem = validTokenPrimary.actor.items.find(i => i.flags["gambits-premades"]?.gpsUuid === gpsUuid);
         let itemProperName = chosenItem?.name;
         const dialogTitlePrimary = `${validTokenPrimary.actor.name} | ${itemProperName}`;
-        const dialogTitleGM = `Waiting for ${validTokenPrimary.actor.name}'s selection | ${itemName}`;
+        const dialogTitleGM = `等待 ${validTokenPrimary.actor.name} 选择 | ${itemName}`;
         
         browserUser = game.gps.getBrowserUser({ actorUuid: validTokenPrimary.actor.uuid });
 
@@ -57,7 +57,7 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your reaction to cast ${itemProperName}? ${targets.length > 1 ? "Enemies succeeded their saving throw. Choose an enemy to target and" : "An enemy succeeded their saving throw. Choose"} an ally to give advantage to below.</p>
+                            <p class="gps-dialog-paragraph">你是否要使用反应施展 ${itemProperName}? ${targets.length > 1 ? "敌人豁免成功，选择一个敌人作为目标并且：" : "敌人豁免成功，选择"} 一个盟友给予优势：</p>
                             <div class="gps-dialog-flex-wrapper">
                                 <div class="gps-dialog-select-container">
                                     <div class="gps-dialog-flex">
@@ -71,7 +71,7 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
                                     ${validFriendlies.length >= 1 ? 
                                     `<select id="ally-token" class="gps-dialog-select">
                                         ${validFriendlies.map(friendly => `<option class="gps-dialog-option" value="${friendly.document.uuid}">${friendly.document.name}</option>`).join('')}
-                                    </select>` : '<div style="padding: 4px; width: 100%; box-sizing: border-box; line-height: normal;"> No valid allies in range.</div>'
+                                    </select>` : '<div style="padding: 4px; width: 100%; box-sizing: border-box; line-height: normal;"> 距离内没有友军。</div>'
                                     }
                                     </div>
                                 </div>
@@ -101,14 +101,14 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
                 <div class="gps-dialog-container">
                     <div class="gps-dialog-section">
                         <div class="gps-dialog-content">
-                            <p class="gps-dialog-paragraph">Would you like to use your reaction to cast ${itemProperName}? ${["none", "detailsDSN", "details"].includes(rollDetailSetting) ? `An enemy successfully hit your ally with a ${workflow.attackTotal}.` : "An enemy successfully hit your ally."} Choose an ally to give advantage to below.</p>
+                            <p class="gps-dialog-paragraph">Would you like to use your reaction to cast ${itemProperName}? ${["none", "detailsDSN", "details"].includes(rollDetailSetting) ? `一个敌人成功以 ${workflow.attackTotal} 命中你的盟友。` : "一个敌人成功命中你的盟友。"} 选择一个盟友给予优势：</p>
                             <div>
                                 <div class="gps-dialog-flex">
-                                    <label for="ally-token" class="gps-dialog-label">Advantage:</label>
+                                    <label for="ally-token" class="gps-dialog-label">优势：</label>
                                     ${validFriendlies.length >= 1 ? 
                                     `<select id="ally-token" class="gps-dialog-select">
                                         ${validFriendlies.map(friendly => `<option class="gps-dialog-option" value="${friendly.document.uuid}">${friendly.document.name}</option>`).join('')}
-                                    </select>` : '<div style="padding: 4px; width: 100%; box-sizing: border-box; line-height: normal;"> No valid allies in range.</div>'
+                                    </select>` : '<div style="padding: 4px; width: 100%; box-sizing: border-box; line-height: normal;"> 距离内没有友军。</div>'
                                     }
                                     <div id="image-container" class="gps-dialog-image-container">
                                         <img id="img_${dialogId}" src="${chosenItem.img}" class="gps-dialog-image">
@@ -126,7 +126,7 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
             `;
         }
 
-        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} has a reaction available for a save triggering ${itemProperName}.</span>`
+        let content = `<span style='text-wrap: wrap;'><img src="${validTokenPrimary.actor.img}" style="width: 25px; height: auto;" /> ${validTokenPrimary.actor.name} 可以用反应触发 ${itemProperName}.</span>`
         let chatData = { user: gmUser, content: content, roll: false };
         let notificationMessage = await MidiQOL.socket().executeAsUser("createChatMessage", gmUser, { chatData });
         
@@ -255,13 +255,13 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
                     workflow.saves.delete(workflowTarget);
                     workflow.failedSaves.add(workflowTarget);
 
-                    chatContent = `<span style='text-wrap: wrap;'>The creature was silvery barbed and failed their ${isSave ? "save" : "check"} for ${workflow.item.name}. <img src="${workflowTarget.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物被银光锐语影响，并在 ${workflow.item.name} 的 ${isSave ? "save" : "check"} 中失败。 <img src="${workflowTarget.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll});
                     return;
                 }
 
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature was silvery barbed but still succeeded their ${isSave ? "save" : "check"} for ${workflow.item.name}. <img src="${workflowTarget.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物被银光锐语影响，但仍在 ${workflow.item.name} 的 ${isSave ? "save" : "check"} 中成功。 <img src="${workflowTarget.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll});
                     continue;
                 }
@@ -279,13 +279,13 @@ export async function silveryBarbs({workflowData,workflowType,workflowCombat}) {
                 workflow.workflowOptions.noOnUseMacro = saveSetting;
 
                 if(workflow.attackTotal < targetAC) {                    
-                    chatContent = `<span style='text-wrap: wrap;'>The creature was silvery barbed, and failed their attack. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物被银光锐语所影响，并攻击失手。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll});
                     return;
                 }
 
                 else {
-                    chatContent = `<span style='text-wrap: wrap;'>The creature was silvery barbed, but were still able to hit their target. <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
+                    chatContent = `<span style='text-wrap: wrap;'>生物被银光锐语所影响，但仍攻击命中。 <img src="${workflow.token.actor.img}" width="30" height="30" style="border:0px"></span>`;
                     await game.gps.socket.executeAsUser("replaceChatCard", gmUser, {actorUuid: validTokenPrimary.actor.uuid, itemUuid: chosenItem.uuid, chatContent: chatContent, rollData: reroll});
                     continue;
                 }

@@ -123,7 +123,7 @@ export async function cloudOfDaggers2024({tokenUuid, regionUuid, regionScenario,
 
         let itemCheck = actor.items.some(i => i.flags["gambits-premades"]?.gpsUuid === "920bfa86-2a3a-4e6a-ae7d-3d420c2c5992");
         if (!itemCheck) await actor.createEmbeddedDocuments("Item", itemData);
-        ui.notifications.info(`Feature item "${item.name} - 移动" 已创建. 使用 ${item.name} 以在需要时移动。`)
+        ui.notifications.info(`Feature item "${item.name} - 移动" 已创建. 使用 ${item.name}  - 移动 以在需要时移动。`)
         return;
     }
 
